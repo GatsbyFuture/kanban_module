@@ -1,0 +1,19 @@
+// HOW CAN WE USE QUERY WHEN USING READ_MANY AND DELETE_MANY
+{
+  id:1,
+  $or: [
+    { caller_line: '100' },
+    { called_line: '101' }
+  ]
+  $and: [
+      { status: 'ANSWERED' },
+      { is_internal: true }
+  ]
+  call_date: {
+    $lt: '2024-01-01'
+    $gt: '2024-01-03'
+  }
+  $sort: { call_date: 'desc' },
+  $limit: 20,
+  $offset: 40,
+}
