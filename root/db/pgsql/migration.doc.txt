@@ -1,0 +1,20 @@
+// yangi migratsiya file yaratadi (migrations folder ichida)...
+npx knex migrate:make create_tb_users
+// yangi seed file yaratadi (seeds folder ichida)...
+npx knex seed:make add_users
+
+// development/production yangi migratisya fillarini database ichida yaratib beradi.
+npx knex migrate:latest
+npx knex migrate:latest --env production
+
+// seeds ichigagi ma'lumotni bazaga default holatda yaratish (seed export qilingan function nomi)
+npx knex seed:run
+
+// migratisya qilinganlarni qayta orqaga qaytarish...
+// (1 step) / (2 step) 2 ta step qaytadi / (3 step) hammasini qaytaradi
+npx knex migrate:rollback
+npx knex migrate:rollback --step=2
+npx knex migrate:rollback --all
+
+// migratsiya bo'lgan barcha fillarni ko'rsatadi...
+npx knex migrate:status
