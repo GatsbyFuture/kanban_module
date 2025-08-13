@@ -13,13 +13,18 @@ interface Config {
                 PG_NAME: string
             },
             TABLES: {
-                TB_KANBANS: string;
-                TB_BOARDS: string;
-                TB_TASKS: string;
-                TB_TASK_USERS: string;
-                TB_TASK_MESSAGES: string;
-                TB_FLOW_SOURCES: string;
-                TB_FLOW_SETTINGS: string;
+                TB_BOARDS: string,
+                TB_BOARDS_USERS: string,
+                TB_BOARDS_SETTINGS: string,
+
+                TB_BOARDS_COLUMNS: string,
+                TB_COLUMNS_TASKS: string,
+
+                TB_TASKS_USERS: string,
+                TB_TASKS_MESSAGES: string,
+
+                TB_FLOW_SOURCES: string,
+                TB_FLOW_SETTINGS: string,
             }
         }
     },
@@ -43,12 +48,17 @@ export const config: Config = {
                 PG_NAME: getConfigEnv('DB_NAME', 'db_call_center_x')
             },
             TABLES: {
-                TB_KANBANS: 'tb_kanbans',
                 TB_BOARDS: 'tb_boards',
-                TB_TASKS: 'tb_tasks',
-                TB_TASK_USERS: 'tb_task_users',
-                TB_TASK_MESSAGES: 'tb_task_messages',
-                TB_FLOW_SOURCES: 'tb_flow_source',
+                TB_BOARDS_USERS: 'tb_boards_users',
+                TB_BOARDS_SETTINGS: 'tb_boards_settings',
+
+                TB_BOARDS_COLUMNS: 'tb_boards_columns',
+                TB_COLUMNS_TASKS: 'tb_columns_tasks',
+
+                TB_TASKS_USERS: 'tb_tasks_users',
+                TB_TASKS_MESSAGES: 'tb_tasks_messages',
+
+                TB_FLOW_SOURCES: 'tb_flow_sources',
                 TB_FLOW_SETTINGS: 'tb_flow_settings',
             }
         }
