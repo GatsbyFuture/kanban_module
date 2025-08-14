@@ -17,12 +17,19 @@ export async function up(knex: Knex): Promise<void> {
 
         await knex.schema.createTable(TB_BOARDS_ROLES, (t) => {
             t.increments('id').primary();
-            t.string('code', 50).notNullable().unique(); // 'owner','admin','member','viewer'
+            t.string('code', 50).notNullable().unique();
             t.string('name', 100).notNullable();
             t.integer('weight').notNullable().defaultTo(0); // permission level/order [0;100]
             t.jsonb('meta').notNullable().defaultTo('{}');
             t.timestamps(true, true);
         });
+
+        await knex(TB_BOARDS_ROLES).insert([
+            {code: 'OWNER', name: 'Owner', weight: 100},
+            {code: 'ADMIN', name: 'Admin', weight: 80},
+            {code: 'MEMBER', name: 'Member', weight: 50},
+            {code: 'VIEWER', name: 'Viewer', weight: 10},
+        ]).onConflict('code').ignore();
 
         // this is trigger for updated_at colum in tb_users
         await knex.raw(`

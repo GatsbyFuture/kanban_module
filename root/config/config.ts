@@ -21,7 +21,7 @@ interface Config {
                 TB_BOARDS_COLUMNS: string,
                 TB_COLUMNS_TASKS: string,
 
-                TB_TASKS_R0LES: string,
+                TB_TASKS_ROLES: string,
                 TB_TASKS_PRIORITIES: string,
                 TB_TASKS_USERS: string,
                 TB_TASKS_MESSAGES: string,
@@ -60,7 +60,7 @@ export const config: Config = {
                 TB_BOARDS_COLUMNS: 'tb_boards_columns',
                 TB_COLUMNS_TASKS: 'tb_columns_tasks',
 
-                TB_TASKS_R0LES: 'tb_tasks_roles',
+                TB_TASKS_ROLES: 'tb_tasks_roles',
                 TB_TASKS_PRIORITIES: 'tb_tasks_priorities',
                 TB_TASKS_USERS: 'tb_tasks_users',
                 TB_TASKS_MESSAGES: 'tb_tasks_messages',
