@@ -23,11 +23,17 @@ export async function up(knex: Knex): Promise<void> {
                 .onDelete('CASCADE')
                 .notNullable();
             t.string('color', 24).defaultTo(null);
+
+            // we can control by rows in future
             t.boolean('allow_swimlanes').notNullable().defaultTo(false);
-            t.jsonb('wip_limits').notNullable().defaultTo('{}'); // {columnId: limit}
+
+            // how much column we can collect in.
+            t.integer('clm_limits').defaultTo(null);
             t.boolean('auto_archive_done').notNullable().defaultTo(false);
-            t.integer('auto_archive_days').defaultTo(null); // if enabled
-            t.jsonb('meta').notNullable().defaultTo('{}'); // board-level custom fields
+            t.integer('auto_archive_days').defaultTo(null);
+
+            // we can save [board-level, color, background img, ...]
+            t.jsonb('meta').notNullable().defaultTo('{}');
             t.timestamp('updated_at').notNullable().defaultTo(knex.fn.now());
             t.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
         });
