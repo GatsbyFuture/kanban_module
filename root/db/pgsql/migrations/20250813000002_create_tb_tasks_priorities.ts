@@ -1,11 +1,16 @@
 import type {Knex} from "knex";
 import {config} from '../../../config/config';
+import path from "path";
+import fs from "fs";
 
 const {
     DB_DATA: {
         PGSQL: {
             TABLES: {
                 TB_TASKS_PRIORITIES
+            },
+            SEED_DATA: {
+                TASK_PRIORITIES_PATH
             }
         }
     }
@@ -24,12 +29,11 @@ export async function up(knex: Knex): Promise<void> {
             t.timestamps(true, true);
         });
 
-        await knex(TB_TASKS_PRIORITIES).insert([
-            {code: 'LOW', name: 'Low', weight: 10},
-            {code: 'NORMAL', name: 'Normal', weight: 50},
-            {code: 'HIGH', name: 'High', weight: 80},
-            {code: 'URGENT', name: 'Urgent', weight: 100},
-        ]).onConflict('code').ignore();
+        const file_path = path.resolve(__dirname, TASK_PRIORITIES_PATH);
+        const raw_data = fs.readFileSync(file_path, 'utf-8');
+        const parsed = JSON.parse(raw_data);
+
+        await knex(TB_TASKS_PRIORITIES).insert(parsed.values);
 
         // this is trigger for updated_at colum in tb_users
         await knex.raw(`

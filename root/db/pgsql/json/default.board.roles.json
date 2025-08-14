@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "code": "OWNER",
+      "name": "Owner",
+      "weight": 100
+    },
+    {
+      "code": "ADMIN",
+      "name": "Admin",
+      "weight": 80
+    },
+    {
+      "code": "MEMBER",
+      "name": "Member",
+      "weight": 50
+    },
+    {
+      "code": "VIEWER",
+      "name": "Viewer",
+      "weight": 10
+    }
+  ]
+}

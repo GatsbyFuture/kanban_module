@@ -29,6 +29,12 @@ interface Config {
                 TB_FLOW_PLATFORMS: string,
                 TB_FLOW_SOURCES: string,
                 TB_FLOW_SETTINGS: string,
+            },
+            SEED_DATA: {
+                BOARD_ROLES_PATH: string,
+                TASK_ROLES_PATH: string,
+                TASK_PRIORITIES_PATH: string,
+                FLOW_PLATFORMS_PATH: string,
             }
         }
     },
@@ -68,6 +74,12 @@ export const config: Config = {
                 TB_FLOW_PLATFORMS: 'tb_flow_platforms',
                 TB_FLOW_SOURCES: 'tb_flow_sources',
                 TB_FLOW_SETTINGS: 'tb_flow_settings',
+            },
+            SEED_DATA: {
+                BOARD_ROLES_PATH: '../../pgsql/json/default.board.roles.json',
+                TASK_ROLES_PATH: '../../pgsql/json/default.task.roles.json',
+                TASK_PRIORITIES_PATH: '../../pgsql/json/default.task.priorities.json',
+                FLOW_PLATFORMS_PATH: '../../pgsql/json/default.flow.platforms.json',
             }
         }
     },

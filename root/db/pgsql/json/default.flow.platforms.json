@@ -1,0 +1,34 @@
+{
+  "values": [
+    {
+      "code": "FACEBOOK",
+      "name": "Facebook",
+      "weight": 100
+    },
+    {
+      "code": "INSTAGRAM",
+      "name": "Instagram",
+      "weight": 90
+    },
+    {
+      "code": "TELEGRAM",
+      "name": "Telegram",
+      "weight": 80
+    },
+    {
+      "code": "YOUTUBE",
+      "name": "YouTube",
+      "weight": 70
+    },
+    {
+      "code": "WHATSAPP",
+      "name": "WhatsApp",
+      "weight": 60
+    },
+    {
+      "code": "OTHER",
+      "name": "Other",
+      "weight": 0
+    }
+  ]
+}

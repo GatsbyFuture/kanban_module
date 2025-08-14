@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "code": "LOW",
+      "name": "Low",
+      "weight": 10
+    },
+    {
+      "code": "NORMAL",
+      "name": "Normal",
+      "weight": 50
+    },
+    {
+      "code": "HIGH",
+      "name": "High",
+      "weight": 80
+    },
+    {
+      "code": "URGENT",
+      "name": "Urgent",
+      "weight": 100
+    }
+  ]
+}

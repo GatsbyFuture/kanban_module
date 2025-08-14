@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "code": "ASSIGNEE",
+      "name": "Assignee",
+      "weight": 100
+    },
+    {
+      "code": "REPORTER",
+      "name": "Reporter",
+      "weight": 80
+    },
+    {
+      "code": "WATCHER",
+      "name": "Watcher",
+      "weight": 20
+    },
+    {
+      "code": "FOLLOWER",
+      "name": "Follower",
+      "weight": 10
+    }
+  ]
+}

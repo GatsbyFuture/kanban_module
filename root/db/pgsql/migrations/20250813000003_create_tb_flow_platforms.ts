@@ -1,11 +1,16 @@
 import type {Knex} from "knex";
 import {config} from '../../../config/config';
+import path from "path";
+import fs from "fs";
 
 const {
     DB_DATA: {
         PGSQL: {
             TABLES: {
                 TB_FLOW_PLATFORMS
+            },
+            SEED_DATA: {
+                FLOW_PLATFORMS_PATH
             }
         }
     }
@@ -25,14 +30,11 @@ export async function up(knex: Knex): Promise<void> {
             t.timestamps(true, true);
         });
 
-        await knex(TB_FLOW_PLATFORMS).insert([
-            {code: 'FACEBOOK', name: 'Facebook', weight: 100},
-            {code: 'INSTAGRAM', name: 'Instagram', weight: 90},
-            {code: 'TELEGRAM', name: 'Telegram', weight: 80},
-            {code: 'YOUTUBE', name: 'YouTube', weight: 70},
-            {code: 'WHATSAPP', name: 'WhatsApp', weight: 60},
-            {code: 'OTHER', name: 'Other', weight: 0},
-        ]).onConflict('code').ignore();
+        const file_path = path.resolve(__dirname, FLOW_PLATFORMS_PATH);
+        const raw_data = fs.readFileSync(file_path, 'utf-8');
+        const parsed = JSON.parse(raw_data);
+
+        await knex(TB_FLOW_PLATFORMS).insert(parsed.values);
 
         // this is trigger for updated_at colum in tb_users
         await knex.raw(`
