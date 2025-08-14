@@ -27,7 +27,7 @@ const knex_config: { [key: string]: Knex.Config } = {
         },
         pool: {min: 2, max: 10},
         migrations: {
-            tableName: 'knex_migrations_clients',
+            tableName: 'knex_migrations_kanban',
             directory: './migrations',
             extension: 'ts'
         },
@@ -47,7 +47,7 @@ const knex_config: { [key: string]: Knex.Config } = {
         },
         pool: {min: 2, max: 10},
         migrations: {
-            tableName: 'knex_migrations_calls',
+            tableName: 'knex_migrations_kanban',
             directory: './migrations',
             extension: 'js'
         },

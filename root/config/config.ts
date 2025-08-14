@@ -14,15 +14,19 @@ interface Config {
             },
             TABLES: {
                 TB_BOARDS: string,
+                TB_BOARDS_ROLES: string,
                 TB_BOARDS_USERS: string,
                 TB_BOARDS_SETTINGS: string,
 
                 TB_BOARDS_COLUMNS: string,
                 TB_COLUMNS_TASKS: string,
 
+                TB_TASKS_R0LES: string,
+                TB_TASKS_PRIORITIES: string,
                 TB_TASKS_USERS: string,
                 TB_TASKS_MESSAGES: string,
 
+                TB_FLOW_PLATFORMS: string,
                 TB_FLOW_SOURCES: string,
                 TB_FLOW_SETTINGS: string,
             }
@@ -49,15 +53,19 @@ export const config: Config = {
             },
             TABLES: {
                 TB_BOARDS: 'tb_boards',
+                TB_BOARDS_ROLES: 'tb_boards_roles',
                 TB_BOARDS_USERS: 'tb_boards_users',
                 TB_BOARDS_SETTINGS: 'tb_boards_settings',
 
                 TB_BOARDS_COLUMNS: 'tb_boards_columns',
                 TB_COLUMNS_TASKS: 'tb_columns_tasks',
 
+                TB_TASKS_R0LES: 'tb_tasks_roles',
+                TB_TASKS_PRIORITIES: 'tb_tasks_priorities',
                 TB_TASKS_USERS: 'tb_tasks_users',
                 TB_TASKS_MESSAGES: 'tb_tasks_messages',
 
+                TB_FLOW_PLATFORMS: 'tb_flow_platforms',
                 TB_FLOW_SOURCES: 'tb_flow_sources',
                 TB_FLOW_SETTINGS: 'tb_flow_settings',
             }
