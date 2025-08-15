@@ -20,17 +20,10 @@ export class BoardModel {
     constructor(protected fastify: FastifyInstance) {
     }
 
-    async create(createBoardDto: CreateBoardDto): Promise<IBoard | undefined> {
+    async create(createBoardDto: CreateBoardDto): Promise<IBoard> {
         const transaction = await this.fastify.pgsql.transaction();
         try {
             const {settings, users, ...board_data} = createBoardDto;
-
-            const board = await transaction(TB_BOARDS).select('id').where({name: board_data.name}).first();
-
-            if (board) {
-                await transaction.rollback();
-                throw new HttpException(ErrorCodes.BOARD_ALREADY_EXIST);
-            }
 
             const new_board = await transaction(TB_BOARDS).insert(board_data)
                 .returning('*')
@@ -62,5 +55,9 @@ export class BoardModel {
             await transaction.rollback();
             throw e;
         }
+    }
+
+    async readOne(query: object): Promise<IBoard | undefined> {
+        return this.fastify.pgsql(TB_BOARDS).select('*').where(query).first();
     }
 }
