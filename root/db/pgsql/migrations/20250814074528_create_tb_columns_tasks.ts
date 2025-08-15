@@ -9,7 +9,6 @@ const {
                 TB_BOARDS_COLUMNS,
                 TB_COLUMNS_TASKS,
                 TB_TASKS_PRIORITIES,
-                TB_FLOW_SOURCES,
             }
         }
     }

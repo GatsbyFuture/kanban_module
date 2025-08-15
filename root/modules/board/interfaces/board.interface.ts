@@ -7,6 +7,7 @@ export interface IBoard {
     desc: string;
     made_by: number;
     is_private: boolean;
+    meta: object;
     is_active: boolean;
     board_settings?: IBoardSetting;
     board_users?: IBoardUser[];

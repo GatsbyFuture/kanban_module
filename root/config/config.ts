@@ -34,7 +34,6 @@ interface Config {
                 BOARD_ROLES_PATH: string,
                 TASK_ROLES_PATH: string,
                 TASK_PRIORITIES_PATH: string,
-                FLOW_PLATFORMS_PATH: string,
             }
         }
     },
@@ -79,7 +78,6 @@ export const config: Config = {
                 BOARD_ROLES_PATH: '../../pgsql/json/default.board.roles.json',
                 TASK_ROLES_PATH: '../../pgsql/json/default.task.roles.json',
                 TASK_PRIORITIES_PATH: '../../pgsql/json/default.task.priorities.json',
-                FLOW_PLATFORMS_PATH: '../../pgsql/json/default.flow.platforms.json',
             }
         }
     },

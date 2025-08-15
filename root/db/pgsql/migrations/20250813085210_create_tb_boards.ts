@@ -21,6 +21,7 @@ export async function up(knex: Knex): Promise<void> {
             t.text('desc').defaultTo(null);
             t.integer('made_by').notNullable().index();
             t.boolean('is_private').notNullable().defaultTo(false);
+            t.jsonb('meta').notNullable().defaultTo('{}');
             t.boolean('is_active').notNullable().defaultTo(false);
             t.timestamp('updated_at').notNullable().defaultTo(knex.fn.now());
             t.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
