@@ -4,7 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "npm test"
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "dev": "ts-node-dev --respawn root/app.ts"
   },
   "author": "RAXMATOV ELDORBEK",
   "license": "ISC",

@@ -1,12 +1,9 @@
 import type {FastifyInstance} from 'fastify';
 import {config} from "../../../config/config";
 
-import {HttpException} from "../../../errors/custom.errors";
-
 import {IBoard} from "../interfaces/board.interface";
 
 import {CreateBoardDto} from "../dto/create.board.dto";
-import {ErrorCodes} from "../../../enums/error.codes";
 
 const {
     DB_DATA: {
@@ -58,6 +55,44 @@ export class BoardModel {
     }
 
     async readOne(query: object): Promise<IBoard | undefined> {
-        return this.fastify.pgsql(TB_BOARDS).select('*').where(query).first();
+        return this.fastify.pgsql(`${TB_BOARDS} as b`)
+            .select([
+                'b.id',
+                'b.desc',
+                'b.made_by',
+                'b.is_private',
+                'b.meta',
+                'b.is_active',
+                this.fastify.pgsql.raw(`
+                    json_build_object(
+                        'color', bs.color,
+                        'allow_swimlanes', bs.allow_swimlanes,
+                        'clm_limits', bs.clm_limits, 
+                        'auto_archive_done', bs.auto_archive_done,
+                        'auto_archive_days', bs.auto_archive_days,
+                        'meta', bs.meta
+                    ) as board_settings
+                `),
+                this.fastify.pgsql.raw(`
+                 COALESCE(
+                      json_agg(
+                        jsonb_build_object(
+                          'id', bu.id,
+                          'user_id', bu.user_id,
+                          'role_id', bu.role_id,
+                          'meta', bu.meta,
+                        )
+                      ) FILTER (WHERE bu.id IS NOT NULL),
+                      '[]'
+                    ) as board_users
+                `)
+            ])
+            .leftJoin(`${TB_BOARDS_SETTINGS} as bs`, 'bs.board_id', 'b.id')
+            .leftJoin(`${TB_BOARDS_USERS} as bu`, 'bu.board_id', 'b.id')
+            .modify((builder) => {
+                Object.entries(query).forEach(([key, value]) => {
+                    builder.where(`b.${key}`, value);
+                })
+            })
     }
 }
