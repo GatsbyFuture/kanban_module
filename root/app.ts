@@ -4,8 +4,8 @@ import cors from '@fastify/cors';
 import path from 'path';
 import * as fs from "node:fs";
 
-// import errorPlugin from "./plugins/error";
-// import pgsqlPlugin from './plugins/pgsql';
+import errorPlugin from "./plugins/error";
+import pgsqlPlugin from './plugins/pgsql';
 // import redisPlugin from './plugins/redis';
 // import axiosPlugin from './plugins/axios';
 // import cronPlugin from './plugins/cron';
@@ -47,8 +47,8 @@ fastify.register(cors, {
     credentials: false
 });
 
-// fastify.register(errorPlugin);
-// fastify.register(pgsqlPlugin);
+fastify.register(errorPlugin);
+fastify.register(pgsqlPlugin);
 // fastify.register(redisPlugin);
 // fastify.register(axiosPlugin);
 // fastify.register(cronPlugin);
