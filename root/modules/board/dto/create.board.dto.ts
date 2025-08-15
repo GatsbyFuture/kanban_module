@@ -7,5 +7,5 @@ export interface CreateBoardDto {
     readonly is_private: boolean;
     readonly is_active: boolean;
     readonly settings: CreateSettingDto;
-    readonly board_users: CreateUserDto[];
+    readonly users: CreateUserDto[];
 }
