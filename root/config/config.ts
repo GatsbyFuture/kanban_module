@@ -26,9 +26,9 @@ interface Config {
                 TB_TASKS_USERS: string,
                 TB_TASKS_MESSAGES: string,
 
-                TB_FLOW_PLATFORMS: string,
-                TB_FLOW_SOURCES: string,
-                TB_FLOW_SETTINGS: string,
+                // TB_FLOW_PLATFORMS: string,
+                // TB_FLOW_SOURCES: string,
+                // TB_FLOW_SETTINGS: string,
             },
             SEED_DATA: {
                 BOARD_ROLES_PATH: string,
@@ -70,9 +70,9 @@ export const config: Config = {
                 TB_TASKS_USERS: 'tb_tasks_users',
                 TB_TASKS_MESSAGES: 'tb_tasks_messages',
 
-                TB_FLOW_PLATFORMS: 'tb_flow_platforms',
-                TB_FLOW_SOURCES: 'tb_flow_sources',
-                TB_FLOW_SETTINGS: 'tb_flow_settings',
+                // TB_FLOW_PLATFORMS: 'tb_flow_platforms',
+                // TB_FLOW_SOURCES: 'tb_flow_sources',
+                // TB_FLOW_SETTINGS: 'tb_flow_settings',
             },
             SEED_DATA: {
                 BOARD_ROLES_PATH: '../../pgsql/json/default.board.roles.json',

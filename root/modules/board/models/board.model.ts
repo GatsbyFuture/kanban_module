@@ -80,19 +80,23 @@ export class BoardModel {
                           'id', bu.id,
                           'user_id', bu.user_id,
                           'role_id', bu.role_id,
-                          'meta', bu.meta,
+                          'meta', bu.meta
                         )
                       ) FILTER (WHERE bu.id IS NOT NULL),
                       '[]'
                     ) as board_users
                 `)
             ])
-            .leftJoin(`${TB_BOARDS_SETTINGS} as bs`, 'bs.board_id', 'b.id')
-            .leftJoin(`${TB_BOARDS_USERS} as bu`, 'bu.board_id', 'b.id')
+            .leftJoin(`${TB_BOARDS_SETTINGS} as bs`, 'b.id', 'bs.board_id')
+            .leftJoin(`${TB_BOARDS_USERS} as bu`, 'b.id', 'bu.board_id')
             .modify((builder) => {
                 Object.entries(query).forEach(([key, value]) => {
                     builder.where(`b.${key}`, value);
                 })
-            })
+            }).groupBy([
+                'b.id', 'b.desc', 'b.made_by', 'b.is_private', 'b.meta', 'b.is_active',
+                'bs.color', 'bs.allow_swimlanes', 'bs.clm_limits', 'bs.auto_archive_done', 'bs.auto_archive_days', 'bs.meta'
+            ])
+            .first();
     }
 }
