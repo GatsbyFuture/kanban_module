@@ -263,3 +263,24 @@ export const optsQueryUser: RouteShorthandOptions = {
         querystring: queryBoardUser,
     }
 }
+
+const delBoardUser = {
+    type: 'object',
+    required: ['ids'],
+    properties: {
+        ids: {
+            type: 'array',
+            minItems: 1,
+            items: {
+                type: 'integer',
+                minimum: 1,
+            }
+        }
+    }
+}
+
+export const optsDelUser: RouteShorthandOptions = {
+    schema: {
+        body: delBoardUser,
+    }
+}

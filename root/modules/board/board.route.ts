@@ -2,7 +2,7 @@ import type {FastifyInstance} from "fastify";
 import {BoardController} from "./board.controller";
 
 import {
-    optsCreateBoard, optsCreateUsers,
+    optsCreateBoard, optsCreateUsers, optsDelUser,
     optsQueryBoard,
     optsQueryBoardAll, optsQueryUser,
     optsUpdateBoard,
@@ -25,4 +25,6 @@ export default async function BoardRoute(fastify: FastifyInstance) {
     fastify.post('/create-users', optsCreateUsers, boardController.createUsers.bind(boardController));
 
     fastify.get('/get-all-users', optsQueryUser, boardController.getAllUsers.bind(boardController));
+
+    fastify.delete('/del-users', optsDelUser, boardController.deleteUsers.bind(boardController));
 }
