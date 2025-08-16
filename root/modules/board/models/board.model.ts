@@ -4,6 +4,8 @@ import {config} from "../../../config/config";
 import {IBoard} from "../interfaces/board.interface";
 
 import {CreateBoardDto} from "../dto/create.board.dto";
+import {QueryBoardDto} from "../dto/query.board.dto";
+import {UpdateBoardDto} from "../dto/update.board.dto";
 
 const {
     DB_DATA: {
@@ -143,5 +145,14 @@ export class BoardModel {
                 'b.id', 'b.desc', 'b.made_by', 'b.is_private', 'b.meta', 'b.is_active',
                 'bs.color', 'bs.allow_swimlanes', 'bs.clm_limits', 'bs.auto_archive_done', 'bs.auto_archive_days', 'bs.meta'
             ])
+    }
+
+    async updateBoard(query: Partial<QueryBoardDto>, patch: Partial<UpdateBoardDto>): Promise<IBoard[]> {
+        return this.fastify.pgsql(TB_BOARDS)
+            .modify((qb) => {
+                Object.entries(query).forEach(([k, v]) => qb.where(k, v));
+            })
+            .update(patch)
+            .returning('*');
     }
 }

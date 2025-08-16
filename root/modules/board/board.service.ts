@@ -7,6 +7,7 @@ import {ErrorCodes} from "../../enums/error.codes";
 
 import {CreateBoardDto} from "./dto/create.board.dto";
 import {QueryBoardDto} from "./dto/query.board.dto";
+import {UpdateBoardDto} from "./dto/update.board.dto";
 
 export class BoardService {
     private boardModel: BoardModel;
@@ -50,6 +51,20 @@ export class BoardService {
     async getAll(query: QueryBoardDto): Promise<IBoard[]> {
         try {
             return this.boardModel.readAll(query);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async updateBoard(query: Partial<QueryBoardDto>, patch: Partial<UpdateBoardDto>): Promise<IBoard[]> {
+        try {
+            const board = await this.boardModel.readOne(query);
+
+            if (!board) {
+                throw new HttpException(ErrorCodes.BOARD_NOT_FOUND);
+            }
+
+            return this.boardModel.updateBoard(query, patch);
         } catch (e) {
             throw e;
         }

@@ -26,7 +26,7 @@ export class BoardController {
 
         return {
             success: true,
-            data: await this.boardService.getOne(queryBoardDto),
+            data: await this.boardService.getOne(queryBoardDto)
         }
     }
 
@@ -35,7 +35,7 @@ export class BoardController {
 
         return {
             success: true,
-            data: await this.boardService.getAll(queryBoardDto),
+            data: await this.boardService.getAll(queryBoardDto)
         }
     }
 }
