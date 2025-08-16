@@ -178,7 +178,11 @@ export class BoardModel {
         return this.fastify.pgsql(TB_BOARDS_USERS)
             .insert(createUserDto)
             .onConflict(['board_id', 'user_id'])
-            .ignore()
+            .merge({
+                role_id: this.fastify.pgsql.raw('EXCLUDED.role_id'),
+                meta: this.fastify.pgsql.raw('EXCLUDED.meta'),
+                updated_at: this.fastify.pgsql.fn.now(),
+            })
             .returning(['id', 'user_id', 'role_id', 'meta'])
     }
 
