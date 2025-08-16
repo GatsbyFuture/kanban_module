@@ -189,4 +189,11 @@ export class BoardModel {
     async readAllUsers(query: QueryUserDto): Promise<IBoardUser[]> {
         return this.fastify.pgsql(TB_BOARDS_USERS).select('*').where(query);
     }
+
+    async deleteUsers(ids: number[]): Promise<Partial<IBoardUser>[]> {
+        return this.fastify.pgsql(TB_BOARDS_USERS)
+            .whereIn('id', ids)
+            .returning(['id', 'user_id', 'meta'])
+            .del();
+    }
 }

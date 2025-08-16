@@ -107,4 +107,12 @@ export class BoardService {
             throw e;
         }
     }
+
+    async deleteUsers(ids: number[]): Promise<Partial<IBoardUser>[]> {
+        try {
+            return this.boardModel.deleteUsers(ids);
+        } catch (e) {
+            throw e;
+        }
+    }
 }
