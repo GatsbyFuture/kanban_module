@@ -90,9 +90,9 @@ export class BoardService {
     }
 
     // THIS SECTION WAS BELONG TO BOARD USERS
-    async createAllUsers(createUserDto: CreateUserDto): Promise<IBoardUser[]> {
+    async createUsers(createUserDto: CreateUserDto[]): Promise<IBoardUser[]> {
         try {
-            return this.boardModel.createUser(createUserDto);
+            return this.boardModel.createUsers(createUserDto);
         } catch (e) {
             throw e;
         }

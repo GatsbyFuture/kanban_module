@@ -197,3 +197,41 @@ export const optsUpdateSetting: RouteShorthandOptions = {
         body: updateSetting
     }
 }
+
+const createBoardUsers = {
+    type: 'object',
+    required: ['users'],
+    properties: {
+        users: {
+            type: 'array',
+            minItems: 1,
+            items: {
+                type: 'object',
+                required: ['board_id', 'user_id', 'role_id'],
+                properties: {
+                    board_id: {
+                        type: 'integer',
+                        minimum: 1,
+                    },
+                    user_id: {
+                        type: 'integer',
+                        minimum: 1,
+                    },
+                    role_id: {
+                        type: 'integer',
+                        minimum: 1,
+                    },
+                    meta: {
+                        type: 'object',
+                    }
+                }
+            }
+        }
+    }
+}
+
+export const optsCreateUsers: RouteShorthandOptions = {
+    schema: {
+        body: createBoardUsers,
+    }
+}

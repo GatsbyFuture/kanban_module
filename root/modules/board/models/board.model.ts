@@ -174,7 +174,7 @@ export class BoardModel {
             .then(rows => rows[0]);
     }
 
-    async createUser(createUserDto: CreateUserDto): Promise<IBoardUser[]> {
+    async createUsers(createUserDto: CreateUserDto[]): Promise<IBoardUser[]> {
         return this.fastify.pgsql(TB_BOARDS_USERS)
             .insert(createUserDto)
             .onConflict(['board_id', 'user_id'])

@@ -2,7 +2,7 @@ import type {FastifyInstance} from "fastify";
 import {BoardController} from "./board.controller";
 
 import {
-    optsCreateBoard,
+    optsCreateBoard, optsCreateUsers,
     optsQueryBoard,
     optsQueryBoardAll,
     optsUpdateBoard,
@@ -21,4 +21,6 @@ export default async function BoardRoute(fastify: FastifyInstance) {
     fastify.patch('/update', optsUpdateBoard, boardController.updateBoard.bind(boardController));
 
     fastify.patch('/update-setting', optsUpdateSetting, boardController.updateSetting.bind(boardController));
+
+    fastify.post('/create-users', optsCreateUsers, boardController.createUsers.bind(boardController));
 }
