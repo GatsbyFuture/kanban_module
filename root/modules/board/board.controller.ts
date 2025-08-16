@@ -55,6 +55,15 @@ export class BoardController {
         }
     }
 
+    async deleteBoards(req: FastifyRequest, _reply: FastifyReply) {
+        const delBoardDto = req.body as DelUserDto;
+
+        return {
+            success: true,
+            data: await this.boardService.deleteBoards(delBoardDto.ids)
+        }
+    }
+
     async updateSetting(req: FastifyRequest, _reply: FastifyReply) {
         const querySettingDto = req.query as QuerySettingDto;
         const updateSettingDto = req.body as Partial<UpdateSettingDto>;
@@ -84,11 +93,11 @@ export class BoardController {
     }
 
     async deleteUsers(req: FastifyRequest, _reply: FastifyReply) {
-        const query = req.body as DelUserDto;
+        const delUserDto = req.body as DelUserDto;
 
         return {
             success: true,
-            data: await this.boardService.deleteUsers(query.ids)
+            data: await this.boardService.deleteUsers(delUserDto.ids)
         }
     }
 }

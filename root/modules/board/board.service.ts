@@ -77,6 +77,15 @@ export class BoardService {
         }
     }
 
+    async deleteBoards(ids: number[]): Promise<Partial<IBoard>[]> {
+        try {
+            return this.boardModel.deleteBoards(ids);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    // FOR BOARD SETTINGS
     async updateSetting(query: QuerySettingDto, patch: Partial<UpdateSettingDto>): Promise<IBoardSetting> {
         try {
             const board = await this.boardModel.readOne({id: query.board_id});
@@ -91,7 +100,7 @@ export class BoardService {
         }
     }
 
-    // THIS SECTION WAS BELONG TO BOARD USERS
+    // FOR BOARD USERS
     async createUsers(createUserDto: CreateUserDto[]): Promise<IBoardUser[]> {
         try {
             return this.boardModel.createUsers(createUserDto);

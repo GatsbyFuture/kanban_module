@@ -164,6 +164,14 @@ export class BoardModel {
             .returning('*');
     }
 
+    async deleteBoards(ids: number[]): Promise<Partial<IBoard>[]> {
+        return this.fastify.pgsql(TB_BOARDS)
+            .whereIn('id', ids)
+            .returning(['id', 'name', 'meta'])
+            .del();
+    }
+
+    // FOR BOARD SETTINGS
     async updateSetting(query: QuerySettingDto, patch: Partial<UpdateSettingDto>): Promise<IBoardSetting> {
         return this.fastify.pgsql(TB_BOARDS_SETTINGS)
             .modify((qb) => {
@@ -174,6 +182,7 @@ export class BoardModel {
             .then(rows => rows[0]);
     }
 
+    // FOR BOARD USERS
     async createUsers(createUserDto: CreateUserDto[]): Promise<IBoardUser[]> {
         return this.fastify.pgsql(TB_BOARDS_USERS)
             .insert(createUserDto)

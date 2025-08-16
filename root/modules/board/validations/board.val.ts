@@ -144,6 +144,27 @@ export const optsUpdateBoard: RouteShorthandOptions = {
     }
 }
 
+const delBoard = {
+    type: 'object',
+    required: ['ids'],
+    properties: {
+        ids: {
+            type: 'array',
+            minItems: 1,
+            items: {
+                type: 'integer',
+                minimum: 1,
+            }
+        }
+    }
+}
+
+export const optsDelBoard: RouteShorthandOptions = {
+    schema: {
+        body: delBoard
+    }
+}
+
 const querySetting = {
     type: 'object',
     required: ['board_id'],

@@ -2,11 +2,11 @@ import type {FastifyInstance} from "fastify";
 import {BoardController} from "./board.controller";
 
 import {
-    optsCreateBoard, optsCreateUsers, optsDelUser,
-    optsQueryBoard,
-    optsQueryBoardAll, optsQueryUser,
-    optsUpdateBoard,
-    optsUpdateSetting
+    optsCreateBoard, optsQueryBoard,
+    optsQueryBoardAll, optsUpdateBoard,
+    optsUpdateSetting,
+    optsCreateUsers, optsQueryUser,
+    optsDelBoard, optsDelUser,
 } from "./validations/board.val";
 
 export default async function BoardRoute(fastify: FastifyInstance) {
@@ -19,6 +19,8 @@ export default async function BoardRoute(fastify: FastifyInstance) {
     fastify.get('/get-all', optsQueryBoardAll, boardController.getAll.bind(boardController));
 
     fastify.patch('/update', optsUpdateBoard, boardController.updateBoard.bind(boardController));
+
+    fastify.delete('/del-many', optsDelBoard, boardController.deleteBoards.bind(boardController));
 
     fastify.patch('/update-setting', optsUpdateSetting, boardController.updateSetting.bind(boardController));
 
