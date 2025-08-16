@@ -60,6 +60,7 @@ export class BoardModel {
         return this.fastify.pgsql(`${TB_BOARDS} as b`)
             .select([
                 'b.id',
+                'b.name',
                 'b.desc',
                 'b.made_by',
                 'b.is_private',
@@ -96,7 +97,7 @@ export class BoardModel {
                     builder.where(`b.${key}`, value);
                 })
             }).groupBy([
-                'b.id', 'b.desc', 'b.made_by', 'b.is_private', 'b.meta', 'b.is_active',
+                'b.id', 'b.name', 'b.desc', 'b.made_by', 'b.is_private', 'b.meta', 'b.is_active',
                 'bs.color', 'bs.allow_swimlanes', 'bs.clm_limits', 'bs.auto_archive_done', 'bs.auto_archive_days', 'bs.meta'
             ])
             .first();
@@ -106,6 +107,7 @@ export class BoardModel {
         return this.fastify.pgsql(`${TB_BOARDS} as b`)
             .select([
                 'b.id',
+                'b.name',
                 'b.desc',
                 'b.made_by',
                 'b.is_private',
@@ -142,7 +144,7 @@ export class BoardModel {
                     builder.where(`b.${key}`, value);
                 })
             }).groupBy([
-                'b.id', 'b.desc', 'b.made_by', 'b.is_private', 'b.meta', 'b.is_active',
+                'b.id', 'b.name', 'b.desc', 'b.made_by', 'b.is_private', 'b.meta', 'b.is_active',
                 'bs.color', 'bs.allow_swimlanes', 'bs.clm_limits', 'bs.auto_archive_done', 'bs.auto_archive_days', 'bs.meta'
             ])
     }

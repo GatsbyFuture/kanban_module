@@ -3,6 +3,7 @@ import {BoardService} from "./board.service";
 
 import {CreateBoardDto} from "./dto/create.board.dto";
 import {QueryBoardDto} from "./dto/query.board.dto";
+import {UpdateBoardDto} from "./dto/update.board.dto";
 
 export class BoardController {
     private boardService: BoardService;
@@ -36,6 +37,16 @@ export class BoardController {
         return {
             success: true,
             data: await this.boardService.getAll(queryBoardDto)
+        }
+    }
+
+    async updateBoard(req: FastifyRequest, reply: FastifyReply) {
+        const queryBoardDto = req.query as Partial<QueryBoardDto>;
+        const updateBoardDto = req.body as Partial<UpdateBoardDto>;
+
+        return {
+            success: true,
+            data: await this.boardService.updateBoard(queryBoardDto, updateBoardDto)
         }
     }
 }

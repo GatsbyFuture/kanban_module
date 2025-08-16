@@ -1,7 +1,7 @@
 import type {FastifyInstance} from "fastify";
 import {BoardController} from "./board.controller";
 
-import {optsCreateBoard, optsQueryBoard, optsQueryBoardAll} from "./validations/board.val";
+import {optsCreateBoard, optsQueryBoard, optsQueryBoardAll, optsUpdateBoard} from "./validations/board.val";
 
 export default async function BoardRoute(fastify: FastifyInstance) {
     const boardController = new BoardController(fastify);
@@ -11,4 +11,6 @@ export default async function BoardRoute(fastify: FastifyInstance) {
     fastify.get('/get-one', optsQueryBoard, boardController.getOne.bind(boardController));
 
     fastify.get('/get-all', optsQueryBoardAll, boardController.getAll.bind(boardController));
+
+    fastify.patch('/update', optsUpdateBoard, boardController.updateBoard.bind(boardController));
 }

@@ -107,3 +107,39 @@ export const optsQueryBoardAll: RouteShorthandOptions = {
         querystring: queryBoardAll
     }
 }
+
+const updateBoard = {
+    type: 'object',
+    properties: {
+        name: {
+            type: 'string',
+            minLength: 2,
+        },
+        desc: {
+            type: 'string',
+        },
+        is_private: {
+            type: 'boolean',
+        },
+        meta: {
+            type: 'object'
+        },
+        is_active: {
+            type: 'boolean',
+        }
+    },
+    anyOf: [
+        {required: ['name']},
+        {required: ['desc']},
+        {required: ['is_private']},
+        {required: ['meta']},
+        {required: ['is_active']},
+    ]
+}
+
+export const optsUpdateBoard: RouteShorthandOptions = {
+    schema: {
+        querystring: queryBoard,
+        body: updateBoard
+    }
+}
