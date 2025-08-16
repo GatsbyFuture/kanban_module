@@ -2,10 +2,12 @@ import type {FastifyInstance} from 'fastify';
 import {config} from "../../../config/config";
 
 import {IBoard} from "../interfaces/board.interface";
+import {IBoardSetting} from "../interfaces/board.setting.interface";
 
 import {CreateBoardDto} from "../dto/create.board.dto";
 import {QueryBoardDto} from "../dto/query.board.dto";
 import {UpdateBoardDto} from "../dto/update.board.dto";
+import {UpdateSettingDto} from "../dto/update.setting.dto";
 
 const {
     DB_DATA: {
@@ -151,6 +153,15 @@ export class BoardModel {
 
     async updateBoard(query: Partial<QueryBoardDto>, patch: Partial<UpdateBoardDto>): Promise<IBoard[]> {
         return this.fastify.pgsql(TB_BOARDS)
+            .modify((qb) => {
+                Object.entries(query).forEach(([k, v]) => qb.where(k, v));
+            })
+            .update(patch)
+            .returning('*');
+    }
+
+    async updateSetting(query: UpdateSettingDto, patch: Partial<UpdateSettingDto>): Promise<IBoardSetting> {
+        return this.fastify.pgsql(TB_BOARDS_SETTINGS)
             .modify((qb) => {
                 Object.entries(query).forEach(([k, v]) => qb.where(k, v));
             })
