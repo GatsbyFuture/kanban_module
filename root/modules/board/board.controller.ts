@@ -29,4 +29,13 @@ export class BoardController {
             data: await this.boardService.getOne(queryBoardDto),
         }
     }
+
+    async getAll(req: FastifyRequest, reply: FastifyReply) {
+        const queryBoardDto = req.query as QueryBoardDto;
+
+        return {
+            success: true,
+            data: await this.boardService.getAll(queryBoardDto),
+        }
+    }
 }

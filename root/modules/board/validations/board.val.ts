@@ -81,3 +81,29 @@ export const optsQueryBoard: RouteShorthandOptions = {
         querystring: queryBoard
     }
 }
+
+const queryBoardAll = {
+    type: 'object',
+    properties: {
+        id: {
+            type: 'integer',
+            minimum: 1,
+        },
+        name: {
+            type: 'string',
+        },
+        made_by: {
+            type: 'integer',
+            minimum: 1,
+        },
+        is_active: {
+            type: 'boolean',
+        }
+    }
+}
+
+export const optsQueryBoardAll: RouteShorthandOptions = {
+    schema: {
+        querystring: queryBoardAll
+    }
+}
