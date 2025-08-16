@@ -8,6 +8,9 @@ import {ErrorCodes} from "../../enums/error.codes";
 import {CreateBoardDto} from "./dto/create.board.dto";
 import {QueryBoardDto} from "./dto/query.board.dto";
 import {UpdateBoardDto} from "./dto/update.board.dto";
+import {QuerySettingDto} from "./dto/query.setting.dto";
+import {UpdateSettingDto} from "./dto/update.setting.dto";
+import {IBoardSetting} from "./interfaces/board.setting.interface";
 
 export class BoardService {
     private boardModel: BoardModel;
@@ -65,6 +68,14 @@ export class BoardService {
             }
 
             return this.boardModel.updateBoard(query, patch);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async updateSetting(query: QuerySettingDto, patch: Partial<UpdateSettingDto>): Promise<IBoardSetting> {
+        try {
+            return this.boardModel.updateSetting(query, patch);
         } catch (e) {
             throw e;
         }

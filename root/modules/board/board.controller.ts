@@ -4,6 +4,8 @@ import {BoardService} from "./board.service";
 import {CreateBoardDto} from "./dto/create.board.dto";
 import {QueryBoardDto} from "./dto/query.board.dto";
 import {UpdateBoardDto} from "./dto/update.board.dto";
+import {QuerySettingDto} from "./dto/query.setting.dto";
+import {UpdateSettingDto} from "./dto/update.setting.dto";
 
 export class BoardController {
     private boardService: BoardService;
@@ -47,6 +49,16 @@ export class BoardController {
         return {
             success: true,
             data: await this.boardService.updateBoard(queryBoardDto, updateBoardDto)
+        }
+    }
+
+    async updateSetting(req: FastifyRequest, reply: FastifyReply) {
+        const querySettingDto = req.query as QuerySettingDto;
+        const updateSettingDto = req.body as Partial<UpdateSettingDto>;
+
+        return {
+            success: true,
+            data: await this.boardService.updateSetting(querySettingDto, updateSettingDto)
         }
     }
 }
