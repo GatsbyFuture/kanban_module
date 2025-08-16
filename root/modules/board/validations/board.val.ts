@@ -143,3 +143,57 @@ export const optsUpdateBoard: RouteShorthandOptions = {
         body: updateBoard
     }
 }
+
+const querySetting = {
+    type: 'object',
+    required: ['id'],
+    properties: {
+        id: {
+            type: 'integer',
+            minimum: 1,
+        }
+    }
+}
+
+const updateSetting = {
+    type: 'object',
+    properties: {
+        color: {
+            type: 'string',
+            minLength: 2,
+            maxLength: 24,
+        },
+        allow_swimlanes: {
+            type: 'boolean',
+        },
+        clm_limits: {
+            type: 'integer',
+            minimum: 1,
+        },
+        auto_archive_done: {
+            type: 'boolean',
+        },
+        auto_archive_days: {
+            type: 'integer',
+            minimum: 1,
+        },
+        meta: {
+            type: 'object'
+        }
+    },
+    anyOf: [
+        {required: ['color']},
+        {required: ['allow_swimlanes']},
+        {required: ['clm_limits']},
+        {required: ['auto_archive_done']},
+        {required: ['auto_archive_days'],},
+        {required: ['meta']},
+    ]
+}
+
+export const optsUpdateSetting: RouteShorthandOptions = {
+    schema: {
+        querystring: querySetting,
+        body: updateSetting
+    }
+}

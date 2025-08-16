@@ -14,7 +14,7 @@ export class BoardController {
         this.boardService = new BoardService(fastify);
     }
 
-    async create(req: FastifyRequest, reply: FastifyReply) {
+    async create(req: FastifyRequest, _reply: FastifyReply) {
         const createBoardDto = req.body as CreateBoardDto;
         const made_by = String(req.headers['x-user-id'] || '');
 
@@ -24,7 +24,7 @@ export class BoardController {
         }
     }
 
-    async getOne(req: FastifyRequest, reply: FastifyReply) {
+    async getOne(req: FastifyRequest, _reply: FastifyReply) {
         const queryBoardDto = req.query as QueryBoardDto;
 
         return {
@@ -33,7 +33,7 @@ export class BoardController {
         }
     }
 
-    async getAll(req: FastifyRequest, reply: FastifyReply) {
+    async getAll(req: FastifyRequest, _reply: FastifyReply) {
         const queryBoardDto = req.query as QueryBoardDto;
 
         return {
@@ -42,7 +42,7 @@ export class BoardController {
         }
     }
 
-    async updateBoard(req: FastifyRequest, reply: FastifyReply) {
+    async updateBoard(req: FastifyRequest, _reply: FastifyReply) {
         const queryBoardDto = req.query as Partial<QueryBoardDto>;
         const updateBoardDto = req.body as Partial<UpdateBoardDto>;
 
@@ -52,7 +52,7 @@ export class BoardController {
         }
     }
 
-    async updateSetting(req: FastifyRequest, reply: FastifyReply) {
+    async updateSetting(req: FastifyRequest, _reply: FastifyReply) {
         const querySettingDto = req.query as QuerySettingDto;
         const updateSettingDto = req.body as Partial<UpdateSettingDto>;
 
