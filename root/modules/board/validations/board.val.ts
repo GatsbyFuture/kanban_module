@@ -235,3 +235,31 @@ export const optsCreateUsers: RouteShorthandOptions = {
         body: createBoardUsers,
     }
 }
+
+const queryBoardUser = {
+    type: 'object',
+    properties: {
+        id: {
+            type: 'integer',
+            minimum: 1,
+        },
+        board_id: {
+            type: 'integer',
+            minimum: 1,
+        },
+        user_id: {
+            type: 'integer',
+            minimum: 1,
+        },
+        role_id: {
+            type: 'integer',
+            minimum: 1,
+        }
+    }
+}
+
+export const optsQueryUser: RouteShorthandOptions = {
+    schema: {
+        querystring: queryBoardUser,
+    }
+}

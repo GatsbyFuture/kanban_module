@@ -1,18 +1,20 @@
 import type {FastifyInstance} from 'fastify';
 import {BoardModel} from "./models/board.model";
-import {IBoard} from "./interfaces/board.interface";
 
 import {HttpException} from "../../errors/custom.errors";
 import {ErrorCodes} from "../../enums/error.codes";
+
+import {IBoard} from "./interfaces/board.interface";
+import {IBoardSetting} from "./interfaces/board.setting.interface";
+import {IBoardUser} from "./interfaces/board.user.interface";
 
 import {CreateBoardDto} from "./dto/create.board.dto";
 import {QueryBoardDto} from "./dto/query.board.dto";
 import {UpdateBoardDto} from "./dto/update.board.dto";
 import {QuerySettingDto} from "./dto/query.setting.dto";
 import {UpdateSettingDto} from "./dto/update.setting.dto";
-import {IBoardSetting} from "./interfaces/board.setting.interface";
 import {CreateUserDto} from "./dto/create.user.dto";
-import {IBoardUser} from "./interfaces/board.user.interface";
+import {QueryUserDto} from "./dto/query.user.dto";
 
 export class BoardService {
     private boardModel: BoardModel;
@@ -93,6 +95,14 @@ export class BoardService {
     async createUsers(createUserDto: CreateUserDto[]): Promise<IBoardUser[]> {
         try {
             return this.boardModel.createUsers(createUserDto);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async getAllUsers(queryUserDto: QueryUserDto): Promise<IBoardUser[]> {
+        try {
+            return this.boardModel.readAllUsers(queryUserDto);
         } catch (e) {
             throw e;
         }

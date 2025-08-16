@@ -7,6 +7,7 @@ import {UpdateBoardDto} from "./dto/update.board.dto";
 import {QuerySettingDto} from "./dto/query.setting.dto";
 import {UpdateSettingDto} from "./dto/update.setting.dto";
 import {CreateUserDto} from "./dto/create.user.dto";
+import {QueryUserDto} from "./dto/query.user.dto";
 
 export class BoardController {
     private boardService: BoardService;
@@ -69,6 +70,15 @@ export class BoardController {
         return {
             success: true,
             data: await this.boardService.createUsers(createUsersDto.users)
+        }
+    }
+
+    async getAllUsers(req: FastifyRequest, _reply: FastifyReply) {
+        const queryUserDto = req.query as QueryUserDto;
+
+        return {
+            success: true,
+            data: await this.boardService.getAllUsers(queryUserDto)
         }
     }
 }

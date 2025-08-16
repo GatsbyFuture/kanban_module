@@ -4,7 +4,7 @@ import {BoardController} from "./board.controller";
 import {
     optsCreateBoard, optsCreateUsers,
     optsQueryBoard,
-    optsQueryBoardAll,
+    optsQueryBoardAll, optsQueryUser,
     optsUpdateBoard,
     optsUpdateSetting
 } from "./validations/board.val";
@@ -23,4 +23,6 @@ export default async function BoardRoute(fastify: FastifyInstance) {
     fastify.patch('/update-setting', optsUpdateSetting, boardController.updateSetting.bind(boardController));
 
     fastify.post('/create-users', optsCreateUsers, boardController.createUsers.bind(boardController));
+
+    fastify.get('/get-all-users', optsQueryUser, boardController.getAllUsers.bind(boardController));
 }
