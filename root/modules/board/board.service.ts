@@ -11,6 +11,8 @@ import {UpdateBoardDto} from "./dto/update.board.dto";
 import {QuerySettingDto} from "./dto/query.setting.dto";
 import {UpdateSettingDto} from "./dto/update.setting.dto";
 import {IBoardSetting} from "./interfaces/board.setting.interface";
+import {CreateUserDto} from "./dto/create.user.dto";
+import {IBoardUser} from "./interfaces/board.user.interface";
 
 export class BoardService {
     private boardModel: BoardModel;
@@ -82,6 +84,15 @@ export class BoardService {
             }
 
             return this.boardModel.updateSetting(query, patch);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    // THIS SECTION WAS BELONG TO BOARD USERS
+    async createAllUsers(createUserDto: CreateUserDto): Promise<IBoardUser[]> {
+        try {
+            return this.boardModel.createUser(createUserDto);
         } catch (e) {
             throw e;
         }

@@ -9,6 +9,9 @@ import {QueryBoardDto} from "../dto/query.board.dto";
 import {UpdateBoardDto} from "../dto/update.board.dto";
 import {UpdateSettingDto} from "../dto/update.setting.dto";
 import {QuerySettingDto} from "../dto/query.setting.dto";
+import {CreateUserDto} from "../dto/create.user.dto";
+import {IBoardUser} from "../interfaces/board.user.interface";
+import {QueryUserDto} from "../dto/query.user.dto";
 
 const {
     DB_DATA: {
@@ -169,5 +172,17 @@ export class BoardModel {
             .update(patch)
             .returning('*')
             .then(rows => rows[0]);
+    }
+
+    async createUser(createUserDto: CreateUserDto): Promise<IBoardUser[]> {
+        return this.fastify.pgsql(TB_BOARDS_USERS)
+            .insert(createUserDto)
+            .onConflict(['board_id', 'user_id'])
+            .ignore()
+            .returning(['id', 'user_id', 'role_id', 'meta'])
+    }
+
+    async readAllUsers(query: QueryUserDto): Promise<IBoardUser[]> {
+        return this.fastify.pgsql(TB_BOARDS_USERS).select('*').where(query);
     }
 }
