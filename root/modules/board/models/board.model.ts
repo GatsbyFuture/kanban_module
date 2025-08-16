@@ -99,4 +99,49 @@ export class BoardModel {
             ])
             .first();
     }
+
+    async readAll(query: object): Promise<IBoard[]> {
+        return this.fastify.pgsql(`${TB_BOARDS} as b`)
+            .select([
+                'b.id',
+                'b.desc',
+                'b.made_by',
+                'b.is_private',
+                'b.meta',
+                'b.is_active',
+                this.fastify.pgsql.raw(`
+                    json_build_object(
+                        'color', bs.color,
+                        'allow_swimlanes', bs.allow_swimlanes,
+                        'clm_limits', bs.clm_limits, 
+                        'auto_archive_done', bs.auto_archive_done,
+                        'auto_archive_days', bs.auto_archive_days,
+                        'meta', bs.meta
+                    ) as board_settings
+                `),
+                this.fastify.pgsql.raw(`
+                 COALESCE(
+                      json_agg(
+                        jsonb_build_object(
+                          'id', bu.id,
+                          'user_id', bu.user_id,
+                          'role_id', bu.role_id,
+                          'meta', bu.meta
+                        )
+                      ) FILTER (WHERE bu.id IS NOT NULL),
+                      '[]'
+                    ) as board_users
+                `)
+            ])
+            .leftJoin(`${TB_BOARDS_SETTINGS} as bs`, 'b.id', 'bs.board_id')
+            .leftJoin(`${TB_BOARDS_USERS} as bu`, 'b.id', 'bu.board_id')
+            .modify((builder) => {
+                Object.entries(query).forEach(([key, value]) => {
+                    builder.where(`b.${key}`, value);
+                })
+            }).groupBy([
+                'b.id', 'b.desc', 'b.made_by', 'b.is_private', 'b.meta', 'b.is_active',
+                'bs.color', 'bs.allow_swimlanes', 'bs.clm_limits', 'bs.auto_archive_done', 'bs.auto_archive_days', 'bs.meta'
+            ])
+    }
 }

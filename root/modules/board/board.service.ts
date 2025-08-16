@@ -46,4 +46,12 @@ export class BoardService {
             throw e;
         }
     }
+
+    async getAll(query: QueryBoardDto): Promise<IBoard[]> {
+        try {
+            return this.boardModel.readAll(query);
+        } catch (e) {
+            throw e;
+        }
+    }
 }
