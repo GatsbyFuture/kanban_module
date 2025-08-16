@@ -8,6 +8,7 @@ import {CreateBoardDto} from "../dto/create.board.dto";
 import {QueryBoardDto} from "../dto/query.board.dto";
 import {UpdateBoardDto} from "../dto/update.board.dto";
 import {UpdateSettingDto} from "../dto/update.setting.dto";
+import {QuerySettingDto} from "../dto/query.setting.dto";
 
 const {
     DB_DATA: {
@@ -160,12 +161,13 @@ export class BoardModel {
             .returning('*');
     }
 
-    async updateSetting(query: UpdateSettingDto, patch: Partial<UpdateSettingDto>): Promise<IBoardSetting> {
+    async updateSetting(query: QuerySettingDto, patch: Partial<UpdateSettingDto>): Promise<IBoardSetting> {
         return this.fastify.pgsql(TB_BOARDS_SETTINGS)
             .modify((qb) => {
                 Object.entries(query).forEach(([k, v]) => qb.where(k, v));
             })
             .update(patch)
-            .returning('*');
+            .returning('*')
+            .then(rows => rows[0]);
     }
 }

@@ -1,3 +1,3 @@
 export interface QuerySettingDto {
-    readonly id: number;
+    readonly board_id: number;
 }

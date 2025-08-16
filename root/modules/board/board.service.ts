@@ -75,6 +75,12 @@ export class BoardService {
 
     async updateSetting(query: QuerySettingDto, patch: Partial<UpdateSettingDto>): Promise<IBoardSetting> {
         try {
+            const board = await this.boardModel.readOne({id: query.board_id});
+
+            if (!board) {
+                throw new HttpException(ErrorCodes.BOARD_NOT_FOUND);
+            }
+
             return this.boardModel.updateSetting(query, patch);
         } catch (e) {
             throw e;

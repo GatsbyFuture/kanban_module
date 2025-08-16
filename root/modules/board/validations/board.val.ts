@@ -146,7 +146,7 @@ export const optsUpdateBoard: RouteShorthandOptions = {
 
 const querySetting = {
     type: 'object',
-    required: ['id'],
+    required: ['board_id'],
     properties: {
         id: {
             type: 'integer',
