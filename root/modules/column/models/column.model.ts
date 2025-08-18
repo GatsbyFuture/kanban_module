@@ -24,8 +24,8 @@ export class ColumnModel {
             .returning('*').then(rows => rows[0]);
     }
 
-    async readOne(query: object): Promise<IColumn> {
-        return this.fastify.pgsql(TB_BOARDS_COLUMNS)
-            .select("*").where(query).first();
+    async readOne(query: object): Promise<IColumn | undefined> {
+        return this.fastify.pgsql(TB_BOARDS_COLUMNS).select("*")
+            .where(query).first();
     }
 }
