@@ -164,7 +164,7 @@ export class BoardModel {
             .returning('*');
     }
 
-    async deleteBoards(ids: number[]): Promise<Partial<IBoard>[]> {
+    async wdeleteBoards(ids: number[]): Promise<Partial<IBoard>[]> {
         return this.fastify.pgsql(TB_BOARDS)
             .whereIn('id', ids)
             .returning(['id', 'name', 'meta'])

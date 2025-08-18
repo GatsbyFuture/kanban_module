@@ -27,6 +27,7 @@ export async function up(knex: Knex): Promise<void> {
             t.integer('wip_limit').defaultTo(null);
             t.boolean('is_backlog').notNullable().defaultTo(false);
             t.boolean('is_done').notNullable().defaultTo(false);
+            t.jsonb('meta').notNullable().defaultTo('{}');
             t.boolean('is_active').notNullable().defaultTo(true);
             t.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
             t.timestamp('updated_at').notNullable().defaultTo(knex.fn.now());
