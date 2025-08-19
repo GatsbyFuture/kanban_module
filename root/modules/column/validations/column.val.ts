@@ -10,7 +10,6 @@ const createColumn = {
         },
         title: {
             type: 'string',
-            minlength: 2
         },
         position: {
             type: 'number',
@@ -33,5 +32,28 @@ const createColumn = {
 export const optsCreateColumn: RouteShorthandOptions = {
     schema: {
         body: createColumn
+    }
+}
+
+const queryColumnOne = {
+    type: 'object',
+    properties: {
+        id: {
+            type: 'integer',
+            minimum: 1
+        },
+        title: {
+            type: 'string',
+        }
+    },
+    anyOf: [
+        {required: ['id']},
+        {required: ['title']},
+    ]
+}
+
+export const optsQueryColumnOne: RouteShorthandOptions = {
+    schema: {
+        querystring: queryColumnOne
     }
 }

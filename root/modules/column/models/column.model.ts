@@ -4,6 +4,7 @@ import {config} from '../../../config/config';
 import {IColumn} from "../interfaces/column.interface";
 
 import {CreateColumnDto} from "../dto/create.column.dto";
+import {QueryColumnDto} from "../dto/query.column.dto";
 
 const {
     DB_DATA: {
@@ -24,7 +25,7 @@ export class ColumnModel {
             .returning('*').then(rows => rows[0]);
     }
 
-    async readOne(query: object): Promise<IColumn | undefined> {
+    async readOne(query: Partial<QueryColumnDto>): Promise<IColumn | undefined> {
         return this.fastify.pgsql(TB_BOARDS_COLUMNS).select("*")
             .where(query).first();
     }

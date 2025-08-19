@@ -6,6 +6,7 @@ import {IColumn} from "./interfaces/column.interface";
 import {CreateColumnDto} from "./dto/create.column.dto";
 import {HttpException} from "../../errors/custom.errors";
 import {ErrorCodes} from "../../enums/error.codes";
+import {QueryColumnDto} from "./dto/query.column.dto";
 
 export class ColumnService {
     private columnModel: ColumnModel;
@@ -25,6 +26,20 @@ export class ColumnService {
             }
 
             return this.columnModel.create(createColumnDto);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async getOne(queryColumnDto: QueryColumnDto): Promise<IColumn | undefined> {
+        try {
+            const column = await this.columnModel.readOne(queryColumnDto);
+
+            if (!column) {
+                throw new HttpException(ErrorCodes.COLUMN_NOT_FOUND);
+            }
+
+            return column;
         } catch (e) {
             throw e;
         }

@@ -1,6 +1,7 @@
 import type {FastifyInstance, FastifyReply, FastifyRequest} from "fastify";
 import {ColumnService} from "./column.service";
 import {CreateColumnDto} from "./dto/create.column.dto";
+import {QueryColumnDto} from "./dto/query.column.dto";
 
 export class ColumnController {
     private columnService: ColumnService;
@@ -15,6 +16,15 @@ export class ColumnController {
         return {
             success: true,
             data: await this.columnService.create(createColumnDto)
+        }
+    }
+
+    async getOne(req: FastifyRequest, _reply: FastifyReply) {
+        const queryColumnDto = req.query as QueryColumnDto;
+
+        return {
+            success: true,
+            data: await this.columnService.getOne(queryColumnDto)
         }
     }
 }
