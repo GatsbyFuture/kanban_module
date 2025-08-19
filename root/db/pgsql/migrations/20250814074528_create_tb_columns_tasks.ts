@@ -57,9 +57,11 @@ export async function up(knex: Knex): Promise<void> {
             t.integer('made_by').notNullable();
             t.jsonb('updated_by').defaultTo('{}');
 
+            t.jsonb('meta').notNullable().defaultTo('{}');
+
             t.boolean('is_active').notNullable().defaultTo(false);
-            t.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
             t.timestamp('updated_at').notNullable().defaultTo(knex.fn.now());
+            t.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
 
             t.index(['board_id', 'column_id']);
             t.index(['has_lead', 'due_date']);
