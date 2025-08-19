@@ -5,6 +5,7 @@ import {IColumn} from "../interfaces/column.interface";
 
 import {CreateColumnDto} from "../dto/create.column.dto";
 import {QueryColumnDto} from "../dto/query.column.dto";
+import {UpdateColumnDto} from "../dto/update.column.dto";
 
 const {
     DB_DATA: {
@@ -20,8 +21,8 @@ export class ColumnModel {
     constructor(protected fastify: FastifyInstance) {
     }
 
-    async create(createColumnDto: CreateColumnDto): Promise<IColumn> {
-        return this.fastify.pgsql(TB_BOARDS_COLUMNS).insert(createColumnDto)
+    async create(create: CreateColumnDto): Promise<IColumn> {
+        return this.fastify.pgsql(TB_BOARDS_COLUMNS).insert(create)
             .returning('*').then(rows => rows[0]);
     }
 
@@ -31,7 +32,12 @@ export class ColumnModel {
     }
 
     async readAll(query: Partial<QueryColumnDto>): Promise<IColumn[]> {
-        return this.fastify.pgsql(TB_BOARDS_COLUMNS)
-            .select("*").where(query);
+        return this.fastify.pgsql(TB_BOARDS_COLUMNS).select("*")
+            .where(query);
+    }
+
+    async update(query: Partial<QueryColumnDto>, update: UpdateColumnDto): Promise<IColumn[]> {
+        return this.fastify.pgsql(TB_BOARDS_COLUMNS).update(update)
+            .where(query).returning('*');
     }
 }

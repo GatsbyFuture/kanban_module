@@ -7,6 +7,7 @@ import {CreateColumnDto} from "./dto/create.column.dto";
 import {HttpException} from "../../errors/custom.errors";
 import {ErrorCodes} from "../../enums/error.codes";
 import {QueryColumnDto} from "./dto/query.column.dto";
+import {UpdateColumnDto} from "./dto/update.column.dto";
 
 export class ColumnService {
     private columnModel: ColumnModel;
@@ -48,6 +49,14 @@ export class ColumnService {
     async getAll(queryColumnDto: QueryColumnDto): Promise<IColumn[]> {
         try {
             return this.columnModel.readAll(queryColumnDto);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async updateMany(queryColumnDto: QueryColumnDto, updateColumnDto: UpdateColumnDto): Promise<IColumn[]> {
+        try {
+            return this.columnModel.update(queryColumnDto, updateColumnDto);
         } catch (e) {
             throw e;
         }
