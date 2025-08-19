@@ -40,4 +40,9 @@ export class ColumnModel {
         return this.fastify.pgsql(TB_BOARDS_COLUMNS).update(update)
             .where(query).returning('*');
     }
+
+    async delete(ids: number[]): Promise<Partial<IColumn>[]> {
+        return this.fastify.pgsql(TB_BOARDS_COLUMNS).whereIn('id', ids)
+            .del().returning(['title', 'position']);
+    }
 }

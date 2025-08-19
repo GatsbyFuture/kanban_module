@@ -6,6 +6,7 @@ import {
     optsQueryColumnOne,
     optsQueryColumnAll,
     optsUpdateColumn,
+    optsDeleteColumn,
 } from "./validations/column.val";
 
 export default async function ColumnRoute(fastify: FastifyInstance) {
@@ -18,4 +19,6 @@ export default async function ColumnRoute(fastify: FastifyInstance) {
     fastify.get('/get-all', optsQueryColumnAll, columnController.getAll.bind(columnController));
 
     fastify.patch('/update-many', optsUpdateColumn, columnController.updateMany.bind(columnController));
+
+    fastify.delete('/delete-many', optsDeleteColumn, columnController.deleteMany.bind(columnController));
 }

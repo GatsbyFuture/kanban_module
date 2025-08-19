@@ -149,3 +149,24 @@ export const optsUpdateColumn: RouteShorthandOptions = {
         body: updateColumn
     }
 }
+
+const deleteColumn = {
+    type: 'object',
+    required: ['ids'],
+    properties: {
+        ids: {
+            type: 'array',
+            minItems: 1,
+            items: {
+                type: 'integer',
+                minimum: 1
+            }
+        }
+    }
+}
+
+export const optsDeleteColumn: RouteShorthandOptions = {
+    schema: {
+        body: deleteColumn
+    }
+}
