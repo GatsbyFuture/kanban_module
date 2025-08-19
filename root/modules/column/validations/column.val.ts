@@ -57,3 +57,29 @@ export const optsQueryColumnOne: RouteShorthandOptions = {
         querystring: queryColumnOne
     }
 }
+
+const queryColumnAll = {
+    type: 'object',
+    properties: {
+        id: {
+            type: 'integer',
+            minimum: 1
+        },
+        board_id: {
+            type: 'integer',
+            minimum: 1
+        },
+        title: {
+            type: 'string',
+        },
+        is_active: {
+            type: 'boolean',
+        }
+    }
+}
+
+export const optsQueryColumnAll: RouteShorthandOptions = {
+    schema: {
+        querystring: queryColumnAll
+    }
+}

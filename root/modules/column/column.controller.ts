@@ -27,4 +27,13 @@ export class ColumnController {
             data: await this.columnService.getOne(queryColumnDto)
         }
     }
+
+    async getAll(req: FastifyRequest, _reply: FastifyReply) {
+        const queryColumnDto = req.query as QueryColumnDto;
+
+        return {
+            success: true,
+            data: await this.columnService.getAll(queryColumnDto)
+        }
+    }
 }

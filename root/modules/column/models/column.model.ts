@@ -29,4 +29,9 @@ export class ColumnModel {
         return this.fastify.pgsql(TB_BOARDS_COLUMNS).select("*")
             .where(query).first();
     }
+
+    async readAll(query: Partial<QueryColumnDto>): Promise<IColumn[]> {
+        return this.fastify.pgsql(TB_BOARDS_COLUMNS)
+            .select("*").where(query);
+    }
 }

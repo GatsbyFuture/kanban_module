@@ -44,4 +44,12 @@ export class ColumnService {
             throw e;
         }
     }
+
+    async getAll(queryColumnDto: QueryColumnDto): Promise<IColumn[]> {
+        try {
+            return this.columnModel.readAll(queryColumnDto);
+        } catch (e) {
+            throw e;
+        }
+    }
 }
