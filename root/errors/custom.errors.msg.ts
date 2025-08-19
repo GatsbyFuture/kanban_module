@@ -7,5 +7,8 @@ export const ErrorMessages: Record<ErrorCodes, { status: number, message: string
     [ErrorCodes.COLUMN_NOT_FOUND]: {status: 404, message: "Column not found!"},
     [ErrorCodes.COLUMN_ALREADY_EXIST]: {status: 409, message: "Column already exists!"},
 
+    [ErrorCodes.TASK_NOT_FOUND]: {status: 404, message: 'Task not found!'},
+    [ErrorCodes.TASK_ALREADY_EXIST]: {status: 409, message: "Task already exists!"},
+
     [ErrorCodes.DATA_NOT_FOUND]: {status: 404, message: 'Data not found!'},
 }

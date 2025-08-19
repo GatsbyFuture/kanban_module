@@ -4,6 +4,7 @@ import {ITask} from "../interfaces/task.interface";
 import {config} from "../../../config/config";
 
 import {CreateTaskDto} from "../dto/create.task.dto";
+import {QueryTaskDto} from "../dto/query.task.dto";
 
 const {
     DB_DATA: {
@@ -22,5 +23,10 @@ export class TaskModel {
     async create(createTaskDto: CreateTaskDto): Promise<ITask> {
         return this.fastify.pgsql(TB_COLUMNS_TASKS).insert(createTaskDto)
             .returning('*').then(rows => rows[0]);
+    }
+
+    async readOne(query: Partial<QueryTaskDto>): Promise<ITask> {
+        return this.fastify.pgsql(TB_COLUMNS_TASKS).select('*')
+            .where(query).first();
     }
 }
