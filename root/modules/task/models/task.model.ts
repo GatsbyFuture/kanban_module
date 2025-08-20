@@ -25,7 +25,7 @@ export class TaskModel {
             .returning('*').then(rows => rows[0]);
     }
 
-    async readOne(query: Partial<QueryTaskDto>): Promise<ITask> {
+    async readOne(query: Partial<QueryTaskDto>): Promise<ITask | undefined> {
         return this.fastify.pgsql(TB_COLUMNS_TASKS).select('*')
             .where(query).first();
     }

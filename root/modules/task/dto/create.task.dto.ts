@@ -9,7 +9,6 @@ export interface CreateTaskDto {
 
     readonly start_date: Date;
     readonly due_date: Date;
-    readonly completed_at: Date;
 
     readonly order_rank: number;
 
