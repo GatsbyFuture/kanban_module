@@ -64,4 +64,12 @@ export class TaskService {
             throw e;
         }
     }
+
+    async deleteMany(ids: number[]): Promise<Partial<ITask>[]> {
+        try {
+            return this.taskModel.delete(ids);
+        } catch (e) {
+            throw e;
+        }
+    }
 }
