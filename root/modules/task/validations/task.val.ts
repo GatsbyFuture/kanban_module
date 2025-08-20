@@ -148,3 +148,29 @@ export const optsDeleteTask: RouteShorthandOptions = {
         body: deleteTask
     }
 }
+
+const createUser = {
+    type: 'object',
+    required: ['users'],
+    properties: {
+        users: {
+            type: 'array',
+            minItems: 1,
+            items: {
+                type: 'object',
+                properties: {
+                    task_id: {type: 'integer', minimum: 1},
+                    user_id: {type: 'integer', minimum: 1},
+                    role_id: {type: 'integer', minimum: 1},
+                    meta: {type: 'object'},
+                }
+            }
+        }
+    }
+}
+
+export const optsCreateTaskUser: RouteShorthandOptions = {
+    schema: {
+        body: createUser
+    }
+}

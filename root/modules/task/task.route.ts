@@ -7,6 +7,7 @@ import {
     optsQueryTaskOne,
     optsUpdateTask,
     optsDeleteTask,
+    optsCreateTaskUser,
 } from "./validations/task.val";
 
 export default async function taskRoute(fastify: FastifyInstance) {
@@ -21,4 +22,6 @@ export default async function taskRoute(fastify: FastifyInstance) {
     fastify.patch('/update-many', optsUpdateTask, taskController.updateMany.bind(taskController));
 
     fastify.delete('/delete-many', optsDeleteTask, taskController.deleteMany.bind(taskController));
+
+    fastify.post('/create-users', optsCreateTaskUser, taskController.createUser.bind(taskController));
 }
