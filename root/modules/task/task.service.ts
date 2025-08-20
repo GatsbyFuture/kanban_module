@@ -47,4 +47,12 @@ export class TaskService {
             throw e;
         }
     }
+
+    async getAll(queryTaskDto: Partial<QueryTaskDto>): Promise<ITask[]> {
+        try {
+            return this.taskModel.readAll(queryTaskDto);
+        } catch (e) {
+            throw e;
+        }
+    }
 }

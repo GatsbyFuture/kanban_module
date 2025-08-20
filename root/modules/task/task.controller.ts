@@ -29,4 +29,13 @@ export class TaskController {
             data: await this.taskService.getOne(queryTaskDto)
         }
     }
+
+    async getAll(req: FastifyRequest, _reply: FastifyReply) {
+        const queryTaskDto = req.query as QueryTaskDto;
+
+        return {
+            success: true,
+            data: await this.taskService.getAll(queryTaskDto)
+        }
+    }
 }

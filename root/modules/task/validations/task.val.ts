@@ -34,7 +34,7 @@ export const optsCreateTask: RouteShorthandOptions = {
     }
 }
 
-const queryTask = {
+const queryTaskOne = {
     type: 'object',
     properties: {
         id: {type: 'integer', minimum: 1},
@@ -52,8 +52,23 @@ const queryTask = {
     ]
 }
 
-export const optsQueryTask: RouteShorthandOptions = {
+export const optsQueryTaskOne: RouteShorthandOptions = {
     schema: {
-        querystring: queryTask
+        querystring: queryTaskOne
+    }
+}
+
+const queryTaskAll = {
+    type: 'object',
+    properties: {
+        board_id: {type: 'integer', minimum: 1},
+        column_id: {type: 'integer', minimum: 1},
+        priority_id: {type: 'integer', minimum: 1},
+    }
+}
+
+export const optsQueryTaskAll: RouteShorthandOptions = {
+    schema: {
+        querystring: queryTaskAll
     }
 }

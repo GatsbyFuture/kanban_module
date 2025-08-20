@@ -29,4 +29,9 @@ export class TaskModel {
         return this.fastify.pgsql(TB_COLUMNS_TASKS).select('*')
             .where(query).first();
     }
+
+    async readAll(query: Partial<QueryTaskDto>): Promise<ITask[]> {
+        return this.fastify.pgsql(TB_COLUMNS_TASKS).select('*')
+            .where(query);
+    }
 }
