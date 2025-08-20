@@ -3,6 +3,7 @@ import {TaskService} from "./task.service";
 
 import {CreateTaskDto} from "./dto/create.task.dto";
 import {QueryTaskDto} from "./dto/query.task.dto";
+import {UpdateTaskDto} from "./dto/update.task.dto";
 
 export class TaskController {
     private taskService: TaskService;
@@ -36,6 +37,16 @@ export class TaskController {
         return {
             success: true,
             data: await this.taskService.getAll(queryTaskDto)
+        }
+    }
+
+    async updateMany(req: FastifyRequest, _reply: FastifyReply) {
+        const queryTaskDto = req.query as Partial<QueryTaskDto>;
+        const updateTaskDto = req.body as UpdateTaskDto;
+
+        return {
+            success: true,
+            data: await this.taskService.updateMany(queryTaskDto, updateTaskDto)
         }
     }
 }

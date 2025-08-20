@@ -59,7 +59,7 @@ export class TaskService {
 
     async updateMany(queryTaskDto: Partial<QueryTaskDto>, updateTaskDto: UpdateTaskDto): Promise<ITask[]> {
         try {
-            return this.taskModel.update(updateTaskDto, updateTaskDto);
+            return this.taskModel.update(queryTaskDto, updateTaskDto);
         } catch (e) {
             throw e;
         }
