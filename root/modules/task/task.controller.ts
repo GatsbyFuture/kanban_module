@@ -4,6 +4,7 @@ import {TaskService} from "./task.service";
 import {CreateTaskDto} from "./dto/create.task.dto";
 import {QueryTaskDto} from "./dto/query.task.dto";
 import {UpdateTaskDto} from "./dto/update.task.dto";
+import {DeleteTaskDto} from "./dto/delete.task.dto";
 
 export class TaskController {
     private taskService: TaskService;
@@ -47,6 +48,15 @@ export class TaskController {
         return {
             success: true,
             data: await this.taskService.updateMany(queryTaskDto, updateTaskDto)
+        }
+    }
+
+    async deleteMany(req: FastifyRequest, _reply: FastifyReply) {
+        const deleteTaskDto = req.body as DeleteTaskDto;
+
+        return {
+            success: true,
+            data: await this.taskService.deleteMany(deleteTaskDto.ids)
         }
     }
 }

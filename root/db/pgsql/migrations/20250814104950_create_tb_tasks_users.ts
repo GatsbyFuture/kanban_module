@@ -31,6 +31,7 @@ export async function up(knex: Knex): Promise<void> {
                 .onDelete('RESTRICT')
                 .defaultTo(null);
 
+            t.jsonb('meta').notNullable().defaultTo('{}');
             t.timestamp('assigned_at').notNullable().defaultTo(knex.fn.now());
 
             t.unique(['task_id', 'user_id']);

@@ -5,7 +5,8 @@ import {
     optsCreateTask,
     optsQueryTaskAll,
     optsQueryTaskOne,
-    optsUpdateTask
+    optsUpdateTask,
+    optsDeleteTask,
 } from "./validations/task.val";
 
 export default async function taskRoute(fastify: FastifyInstance) {
@@ -18,4 +19,6 @@ export default async function taskRoute(fastify: FastifyInstance) {
     fastify.get('/get-all', optsQueryTaskAll, taskController.getAll.bind(taskController));
 
     fastify.patch('/update-many', optsUpdateTask, taskController.updateMany.bind(taskController));
+
+    fastify.delete('/delete-many', optsDeleteTask, taskController.deleteMany.bind(taskController));
 }
