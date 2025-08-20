@@ -1,0 +1,25 @@
+export interface UpdateTaskDto {
+    readonly column_id: number;
+
+    readonly title: string;
+    readonly desc: string;
+
+    readonly priority_id: number;
+
+    readonly due_date: Date;
+
+    readonly order_rank: number;
+
+    readonly external_refs: object;
+    readonly contact: object;
+    readonly has_lead: boolean;
+    readonly lead_id: number;
+
+    readonly labels: string[];
+    readonly attachments: object;
+    readonly checklist: object;
+
+    readonly updated_by: object;
+
+    readonly meta: object;
+}

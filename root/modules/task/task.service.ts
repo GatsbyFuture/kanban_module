@@ -8,6 +8,7 @@ import {ErrorCodes} from "../../enums/error.codes";
 
 import {CreateTaskDto} from "./dto/create.task.dto";
 import {QueryTaskDto} from "./dto/query.task.dto";
+import {UpdateTaskDto} from "./dto/update.task.dto";
 
 export class TaskService {
     private taskModel: TaskModel;
@@ -51,6 +52,14 @@ export class TaskService {
     async getAll(queryTaskDto: Partial<QueryTaskDto>): Promise<ITask[]> {
         try {
             return this.taskModel.readAll(queryTaskDto);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async updateMany(queryTaskDto: Partial<QueryTaskDto>, updateTaskDto: UpdateTaskDto): Promise<ITask[]> {
+        try {
+            return this.taskModel.update(updateTaskDto, updateTaskDto);
         } catch (e) {
             throw e;
         }

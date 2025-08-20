@@ -5,6 +5,7 @@ import {config} from "../../../config/config";
 
 import {CreateTaskDto} from "../dto/create.task.dto";
 import {QueryTaskDto} from "../dto/query.task.dto";
+import {UpdateTaskDto} from "../dto/update.task.dto";
 
 const {
     DB_DATA: {
@@ -34,4 +35,10 @@ export class TaskModel {
         return this.fastify.pgsql(TB_COLUMNS_TASKS).select('*')
             .where(query);
     }
+
+    async update(query: Partial<QueryTaskDto>, update: UpdateTaskDto): Promise<ITask[]> {
+        return this.fastify.pgsql(TB_COLUMNS_TASKS).update(update)
+            .where(query).returning('*');
+    }
+
 }
