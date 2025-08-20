@@ -21,9 +21,12 @@ export class TaskUserModel {
     constructor(protected fastify: FastifyInstance) {
     }
 
-    async create(createUserDto: CreateTaskUserDto): Promise<ITaskUser[]> {
-        return this.fastify.pgsql(TB_TASKS_USERS).insert(createUserDto)
-            .returning('*');
+    async create(createTaskUserDto: CreateTaskUserDto[]): Promise<ITaskUser[]> {
+        return this.fastify.pgsql(TB_TASKS_USERS)
+            .insert(createTaskUserDto)
+            .onConflict(['task_id', 'user_id'])
+            .ignore()
+            .returning(['id', 'task_id', 'user_id', 'role_id', 'meta']);
     }
 
     async readOne(query: QueryTaskUserDto): Promise<ITaskUser | undefined> {
