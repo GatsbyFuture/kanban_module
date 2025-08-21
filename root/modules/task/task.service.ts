@@ -16,6 +16,7 @@ import {QueryTaskUserDto} from "./dto/user/query.task.user.dto";
 import {ITaskMsg} from "./interfaces/task.msg.interface";
 import {TaskMsgModel} from "./models/task.msg.model";
 import {CreateTaskMsgDto} from "./dto/msg/create.task.msg.dto";
+import {QueryTaskMsgDto} from "./dto/msg/query.task.msg.dto";
 
 export class TaskService {
     private taskModel: TaskModel;
@@ -127,6 +128,20 @@ export class TaskService {
     async createMsg(createTaskMsgDto: CreateTaskMsgDto): Promise<ITaskMsg> {
         try {
             return this.taskMsgModel.create(createTaskMsgDto);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async readOne(queryTaskMsgDto: QueryTaskMsgDto): Promise<ITaskMsg> {
+        try {
+            const task_msg = await this.taskMsgModel.readOne(queryTaskMsgDto);
+
+            if (!task_msg) {
+                throw new HttpException(ErrorCodes.TASK_MSG_NOT_FOUND);
+            }
+
+            return task_msg;
         } catch (e) {
             throw e;
         }

@@ -10,5 +10,7 @@ export enum ErrorCodes {
 
     TASK_USER_NOT_FOUND = 'TASK_USER_NOT_FOUND',
 
+    TASK_MSG_NOT_FOUND = 'TASK_MSG_NOT_FOUND',
+
     DATA_NOT_FOUND = 'DATA_NOT_FOUND',
 }

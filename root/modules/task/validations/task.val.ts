@@ -238,7 +238,7 @@ const createMsg = {
         task_id: {type: 'integer', minimum: 1},
         user_id: {type: 'integer', minimum: 1},
         message: {type: 'string'},
-        attachments: {type: 'array', items: {type: 'object'}},
+        attachments: {type: 'object'},
         meta: {type: 'object'}
     }
 }
@@ -246,5 +246,25 @@ const createMsg = {
 export const optsCreateTaskMsg: RouteShorthandOptions = {
     schema: {
         body: createMsg
+    }
+}
+
+const getMsgOne = {
+    type: 'object',
+    properties: {
+        id: {type: 'integer', minimum: 1},
+        task_id: {type: 'integer', minimum: 1},
+        user_id: {type: 'integer', minimum: 1},
+    },
+    anyOf: [
+        {required: ['id']},
+        {required: ['task_id']},
+        {required: ['user_id']}
+    ]
+}
+
+export const optsGetMsgOne: RouteShorthandOptions = {
+    schema: {
+        querystring: getMsgOne
     }
 }

@@ -25,7 +25,7 @@ export class TaskMsgModel {
             .returning('*').then(rows => rows[0]);
     }
 
-    async readOne(query: object): Promise<ITaskMsg> {
+    async readOne(query: object): Promise<ITaskMsg | undefined> {
         return this.fastify.pgsql(TB_TASKS_MESSAGES).select('*')
             .where(query).first();
     }

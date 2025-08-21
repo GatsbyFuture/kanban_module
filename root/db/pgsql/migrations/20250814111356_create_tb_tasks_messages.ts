@@ -24,14 +24,14 @@ export async function up(knex: Knex): Promise<void> {
                 .notNullable();
             t.integer('user_id').notNullable(); // FK if you want set it
             t.text('message').notNullable();
-            t.jsonb('attachments').notNullable().defaultTo('[]');
+            t.jsonb('attachments').notNullable().defaultTo('{}');
             t.jsonb('meta').notNullable().defaultTo('{}'); // [edited, pinned, reactions]
             t.timestamp('updated_at').notNullable().defaultTo(knex.fn.now());
             t.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
 
             t.index(['task_id', 'user_id', 'created_at']);
         });
-        
+
         console.log(`Created ${TB_TASKS_MESSAGES} table successfully!!!`);
     } catch (e) {
         console.error(`Error creating ${TB_TASKS_MESSAGES} table:`, e);
