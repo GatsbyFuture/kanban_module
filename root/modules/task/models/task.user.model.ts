@@ -4,8 +4,8 @@ import {config} from "../../../config/config";
 
 import {ITaskUser} from "../interfaces/task.user.interface";
 
-import {CreateTaskUserDto} from "../dto/create.task.user.dto";
-import {QueryTaskUserDto} from "../dto/query.task.user.dto";
+import {CreateTaskUserDto} from "../dto/user/create.task.user.dto";
+import {QueryTaskUserDto} from "../dto/user/query.task.user.dto";
 
 const {
     DB_DATA: {

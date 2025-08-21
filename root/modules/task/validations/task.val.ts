@@ -230,3 +230,21 @@ export const optsDeleteTaskUser: RouteShorthandOptions = {
         body: deleteTaskUser
     }
 }
+
+const createMsg = {
+    type: 'object',
+    required: ['task_id', 'user_id', 'message'],
+    properties: {
+        task_id: {type: 'integer', minimum: 1},
+        user_id: {type: 'integer', minimum: 1},
+        message: {type: 'string'},
+        attachments: {type: 'array', items: {type: 'object'}},
+        meta: {type: 'object'}
+    }
+}
+
+export const optsCreateTaskMsg: RouteShorthandOptions = {
+    schema: {
+        body: createMsg
+    }
+}

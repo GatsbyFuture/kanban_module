@@ -11,17 +11,21 @@ import {ErrorCodes} from "../../enums/error.codes";
 import {CreateTaskDto} from "./dto/create.task.dto";
 import {QueryTaskDto} from "./dto/query.task.dto";
 import {UpdateTaskDto} from "./dto/update.task.dto";
-import {CreateTaskUserDto} from "./dto/create.task.user.dto";
-import {QueryTaskUserDto} from "./dto/query.task.user.dto";
-import {IBoardUser} from "../board/interfaces/board.user.interface";
+import {CreateTaskUserDto} from "./dto/user/create.task.user.dto";
+import {QueryTaskUserDto} from "./dto/user/query.task.user.dto";
+import {ITaskMsg} from "./interfaces/task.msg.interface";
+import {TaskMsgModel} from "./models/task.msg.model";
+import {CreateTaskMsgDto} from "./dto/msg/create.task.msg.dto";
 
 export class TaskService {
     private taskModel: TaskModel;
     private taskUserModel: TaskUserModel;
+    private taskMsgModel: TaskMsgModel;
 
     constructor(protected fastify: FastifyInstance) {
         this.taskModel = new TaskModel(fastify);
         this.taskUserModel = new TaskUserModel(fastify);
+        this.taskMsgModel = new TaskMsgModel(fastify);
     }
 
     async create(createTaskDto: CreateTaskDto, made_by: string): Promise<ITask> {
@@ -114,6 +118,15 @@ export class TaskService {
     async deleteUsers(ids: number[]): Promise<Partial<ITaskUser>[]> {
         try {
             return this.taskUserModel.deleteMany(ids);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    // FOR TASK MESSAGES
+    async createMsg(createTaskMsgDto: CreateTaskMsgDto): Promise<ITaskMsg> {
+        try {
+            return this.taskMsgModel.create(createTaskMsgDto);
         } catch (e) {
             throw e;
         }

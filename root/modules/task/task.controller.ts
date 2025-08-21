@@ -5,9 +5,11 @@ import {CreateTaskDto} from "./dto/create.task.dto";
 import {QueryTaskDto} from "./dto/query.task.dto";
 import {UpdateTaskDto} from "./dto/update.task.dto";
 import {DeleteTaskDto} from "./dto/delete.task.dto";
-import {CreateTaskUserDto} from "./dto/create.task.user.dto";
-import {QueryTaskUserDto} from "./dto/query.task.user.dto";
-import {DelTaskUserDto} from "./dto/delete.task.user.dto";
+import {CreateTaskUserDto} from "./dto/user/create.task.user.dto";
+import {QueryTaskUserDto} from "./dto/user/query.task.user.dto";
+import {DelTaskUserDto} from "./dto/user/delete.task.user.dto";
+import {CreateTaskMsgDto} from "./dto/msg/create.task.msg.dto";
+import {ITaskMsg} from "./interfaces/task.msg.interface";
 
 export class TaskController {
     private taskService: TaskService;
@@ -97,6 +99,16 @@ export class TaskController {
         return {
             success: true,
             data: await this.taskService.deleteUsers(delTaskUserDto.ids)
+        }
+    }
+
+    // FOR TASK MESSAGES
+    async createMsg(req: FastifyRequest, _reply: FastifyReply) {
+        const createTaskMsgDto = req.body as CreateTaskMsgDto;
+
+        return {
+            success: true,
+            data: await this.taskService.createMsg(createTaskMsgDto)
         }
     }
 }

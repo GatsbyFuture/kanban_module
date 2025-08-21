@@ -7,7 +7,7 @@ import {
     optsUpdateTask, optsDeleteTask,
     // FOR TASK USERS
     optsCreateTaskUser,
-    optsGetTaskUserOne, optsGetTaskUserAll, optsDeleteTaskUser,
+    optsGetTaskUserOne, optsGetTaskUserAll, optsDeleteTaskUser, optsCreateTaskMsg,
 } from "./validations/task.val";
 
 export default async function taskRoute(fastify: FastifyInstance) {
@@ -33,5 +33,5 @@ export default async function taskRoute(fastify: FastifyInstance) {
     fastify.delete('/delete-many-users', optsDeleteTaskUser, taskController.deleteUsers.bind(taskController));
 
     // FOR TASK MESSAGE
-    // fastify.post('/create-message', taskController)
+    fastify.post('/create-message', optsCreateTaskMsg, taskController.createMsg.bind(taskController));
 }
