@@ -41,4 +41,9 @@ export class TaskMsgModel {
         return this.fastify.pgsql(TB_TASKS_MESSAGES).update(update)
             .where(query).returning('*');
     }
+
+    async deleteMany(ids: number[]): Promise<Partial<ITaskMsg>[]> {
+        return this.fastify.pgsql(TB_TASKS_MESSAGES).whereIn('id', ids)
+            .returning(['id', 'task_id', 'user_id', 'message']).del();
+    }
 }

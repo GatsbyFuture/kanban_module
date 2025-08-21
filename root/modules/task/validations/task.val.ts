@@ -290,6 +290,7 @@ const updateMsgs = {
         message: {type: 'string'},
         attachments: {type: 'object'},
         meta: {type: 'object'},
+        is_active: {type: 'boolean'}
     },
     anyOf: [
         {required: ['message']},

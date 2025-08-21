@@ -26,6 +26,7 @@ export async function up(knex: Knex): Promise<void> {
             t.text('message').notNullable();
             t.jsonb('attachments').notNullable().defaultTo('{}');
             t.jsonb('meta').notNullable().defaultTo('{}'); // [edited, pinned, reactions]
+            t.boolean('is_active').notNullable().defaultTo(true);
             t.timestamp('updated_at').notNullable().defaultTo(knex.fn.now());
             t.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
 
