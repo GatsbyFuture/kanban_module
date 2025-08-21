@@ -305,3 +305,23 @@ export const optsUpdateMsgs: RouteShorthandOptions = {
         body: updateMsgs
     }
 }
+
+const deleteTaskMsgs = {
+    type: 'object',
+    properties: {
+        ids: {
+            type: 'array',
+            minItems: 1,
+            items: {
+                type: 'integer',
+                minimum: 1
+            }
+        },
+    }
+}
+
+export const optsDeleteTaskMsgs: RouteShorthandOptions = {
+    schema: {
+        body: deleteTaskMsgs
+    }
+}

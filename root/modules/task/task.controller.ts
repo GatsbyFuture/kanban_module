@@ -11,6 +11,7 @@ import {DelTaskUserDto} from "./dto/user/delete.task.user.dto";
 import {CreateTaskMsgDto} from "./dto/msg/create.task.msg.dto";
 import {QueryTaskMsgDto} from "./dto/msg/query.task.msg.dto";
 import {UpdateTaskMsgDto} from "./dto/msg/update.task.msg.dto";
+import {DeleteTaskMsgDto} from "./dto/msg/delete.task.msg.dto";
 
 export class TaskController {
     private taskService: TaskService;
@@ -138,6 +139,15 @@ export class TaskController {
         return {
             success: true,
             data: await this.taskService.updateManyMsg(queryTaskMsgDto, updateTaskMsgDto)
+        }
+    }
+
+    async deleteManyMsg(req: FastifyRequest, _reply: FastifyReply) {
+        const queryTaskMsgDto = req.query as DeleteTaskMsgDto;
+
+        return {
+            success: true,
+            data: await this.taskService.deleteManyMsg(queryTaskMsgDto.ids)
         }
     }
 }
