@@ -210,3 +210,23 @@ export const optsGetTaskUserAll: RouteShorthandOptions = {
         querystring: queryTaskUserAll
     }
 }
+
+const deleteTaskUser = {
+    type: 'object',
+    properties: {
+        ids: {
+            type: 'array',
+            minItems: 1,
+            items: {
+                type: 'integer',
+                minimum: 1
+            }
+        },
+    }
+}
+
+export const optsDeleteTaskUser: RouteShorthandOptions = {
+    schema: {
+        body: deleteTaskUser
+    }
+}

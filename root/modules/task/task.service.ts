@@ -13,6 +13,7 @@ import {QueryTaskDto} from "./dto/query.task.dto";
 import {UpdateTaskDto} from "./dto/update.task.dto";
 import {CreateTaskUserDto} from "./dto/create.task.user.dto";
 import {QueryTaskUserDto} from "./dto/query.task.user.dto";
+import {IBoardUser} from "../board/interfaces/board.user.interface";
 
 export class TaskService {
     private taskModel: TaskModel;
@@ -105,6 +106,14 @@ export class TaskService {
     async getAllUsers(queryTaskUserDto: QueryTaskUserDto): Promise<ITaskUser[]> {
         try {
             return this.taskUserModel.readAll(queryTaskUserDto);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async deleteUsers(ids: number[]): Promise<Partial<ITaskUser>[]> {
+        try {
+            return this.taskUserModel.deleteMany(ids);
         } catch (e) {
             throw e;
         }

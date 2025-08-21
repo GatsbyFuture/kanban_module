@@ -7,6 +7,7 @@ import {UpdateTaskDto} from "./dto/update.task.dto";
 import {DeleteTaskDto} from "./dto/delete.task.dto";
 import {CreateTaskUserDto} from "./dto/create.task.user.dto";
 import {QueryTaskUserDto} from "./dto/query.task.user.dto";
+import {DelTaskUserDto} from "./dto/delete.task.user.dto";
 
 export class TaskController {
     private taskService: TaskService;
@@ -87,6 +88,15 @@ export class TaskController {
         return {
             success: true,
             data: await this.taskService.getAllUsers(queryTaskUserDto)
+        }
+    }
+
+    async deleteUsers(req: FastifyRequest, _reply: FastifyReply) {
+        const delTaskUserDto = req.body as DelTaskUserDto;
+
+        return {
+            success: true,
+            data: await this.taskService.deleteUsers(delTaskUserDto.ids)
         }
     }
 }
