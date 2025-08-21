@@ -61,8 +61,8 @@ export class TaskController {
         }
     }
 
-    // CREATE TASK USERS
-    async createUser(req: FastifyRequest, reply: FastifyReply) {
+    // FOR TASK USERS
+    async createUser(req: FastifyRequest, _reply: FastifyReply) {
         const createTaskUserDto = req.body as { users: CreateTaskUserDto[] };
 
         return {

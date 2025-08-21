@@ -72,12 +72,13 @@ export class TaskService {
 
     async deleteMany(ids: number[]): Promise<Partial<ITask>[]> {
         try {
-            return this.taskModel.delete(ids);
+            return this.taskModel.deleteMany(ids);
         } catch (e) {
             throw e;
         }
     }
 
+    // FOR TASK USERS
     async createUser(createTaskUserDto: CreateTaskUserDto[]): Promise<ITaskUser[]> {
         try {
             return this.taskUserModel.create(createTaskUserDto);

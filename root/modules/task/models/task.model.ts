@@ -41,7 +41,7 @@ export class TaskModel {
             .where(query).returning('*');
     }
 
-    async delete(ids: number[]): Promise<Partial<ITask>[]> {
+    async deleteMany(ids: number[]): Promise<Partial<ITask>[]> {
         return this.fastify.pgsql(TB_COLUMNS_TASKS).whereIn('id', ids)
             .del().returning(['title', 'order_rank', 'updated_by']);
     }

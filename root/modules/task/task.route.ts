@@ -23,5 +23,6 @@ export default async function taskRoute(fastify: FastifyInstance) {
 
     fastify.delete('/delete-many', optsDeleteTask, taskController.deleteMany.bind(taskController));
 
+    // FOR TASK USERS
     fastify.post('/create-users', optsCreateTaskUser, taskController.createUser.bind(taskController));
 }
