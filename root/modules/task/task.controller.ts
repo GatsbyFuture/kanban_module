@@ -9,7 +9,7 @@ import {CreateTaskUserDto} from "./dto/user/create.task.user.dto";
 import {QueryTaskUserDto} from "./dto/user/query.task.user.dto";
 import {DelTaskUserDto} from "./dto/user/delete.task.user.dto";
 import {CreateTaskMsgDto} from "./dto/msg/create.task.msg.dto";
-import {ITaskMsg} from "./interfaces/task.msg.interface";
+import {QueryTaskMsgDto} from "./dto/msg/query.task.msg.dto";
 
 export class TaskController {
     private taskService: TaskService;
@@ -109,6 +109,15 @@ export class TaskController {
         return {
             success: true,
             data: await this.taskService.createMsg(createTaskMsgDto)
+        }
+    }
+
+    async getOneMsg(req: FastifyRequest, _reply: FastifyReply) {
+        const queryTaskMsgDto = req.query as QueryTaskMsgDto;
+
+        return {
+            success: true,
+            data: await this.taskService.getOneMsg(queryTaskMsgDto)
         }
     }
 }

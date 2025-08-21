@@ -5,6 +5,7 @@ import {config} from "../../../config/config";
 import {ITaskMsg} from "../interfaces/task.msg.interface";
 
 import {CreateTaskMsgDto} from "../dto/msg/create.task.msg.dto";
+import {QueryTaskMsgDto} from "../dto/msg/query.task.msg.dto";
 
 const {
     DB_DATA: {
@@ -25,7 +26,7 @@ export class TaskMsgModel {
             .returning('*').then(rows => rows[0]);
     }
 
-    async readOne(query: object): Promise<ITaskMsg | undefined> {
+    async readOne(query: Partial<QueryTaskMsgDto>): Promise<ITaskMsg | undefined> {
         return this.fastify.pgsql(TB_TASKS_MESSAGES).select('*')
             .where(query).first();
     }

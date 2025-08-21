@@ -133,7 +133,7 @@ export class TaskService {
         }
     }
 
-    async readOne(queryTaskMsgDto: QueryTaskMsgDto): Promise<ITaskMsg> {
+    async getOneMsg(queryTaskMsgDto: Partial<QueryTaskMsgDto>): Promise<ITaskMsg> {
         try {
             const task_msg = await this.taskMsgModel.readOne(queryTaskMsgDto);
 
