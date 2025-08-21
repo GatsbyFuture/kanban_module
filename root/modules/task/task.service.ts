@@ -101,4 +101,12 @@ export class TaskService {
             throw e;
         }
     }
+
+    async getAllUsers(queryTaskUserDto: QueryTaskUserDto): Promise<ITaskUser[]> {
+        try {
+            return this.taskUserModel.readAll(queryTaskUserDto);
+        } catch (e) {
+            throw e;
+        }
+    }
 }

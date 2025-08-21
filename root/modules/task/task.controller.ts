@@ -80,4 +80,13 @@ export class TaskController {
             data: await this.taskService.getOneUser(queryTaskUserDto)
         }
     }
+
+    async getAllUsers(req: FastifyRequest, _reply: FastifyReply) {
+        const queryTaskUserDto = req.query as QueryTaskUserDto;
+
+        return {
+            success: true,
+            data: await this.taskService.getAllUsers(queryTaskUserDto)
+        }
+    }
 }

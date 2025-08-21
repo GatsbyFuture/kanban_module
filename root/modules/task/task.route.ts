@@ -7,7 +7,7 @@ import {
     optsUpdateTask, optsDeleteTask,
     // FOR TASK USERS
     optsCreateTaskUser,
-    optsGetTaskUserOne,
+    optsGetTaskUserOne, optsGetTaskUserAll,
 } from "./validations/task.val";
 
 export default async function taskRoute(fastify: FastifyInstance) {
@@ -27,4 +27,6 @@ export default async function taskRoute(fastify: FastifyInstance) {
     fastify.post('/create-users', optsCreateTaskUser, taskController.createUser.bind(taskController));
 
     fastify.get('/get-one-user', optsGetTaskUserOne, taskController.getOneUser.bind(taskController));
+
+    fastify.get('/get-all-user', optsGetTaskUserAll, taskController.getAllUsers.bind(taskController));
 }
