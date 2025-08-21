@@ -3,7 +3,7 @@ export interface ITaskMsg {
     task_id: number;
     user_id: number;
     message: string;
-    attachments: object[];
+    attachments: object;
     meta: object;
     updated_at: Date;
     created_at: Date;

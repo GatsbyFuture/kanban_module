@@ -17,6 +17,7 @@ import {ITaskMsg} from "./interfaces/task.msg.interface";
 import {TaskMsgModel} from "./models/task.msg.model";
 import {CreateTaskMsgDto} from "./dto/msg/create.task.msg.dto";
 import {QueryTaskMsgDto} from "./dto/msg/query.task.msg.dto";
+import {UpdateTaskMsgDto} from "./dto/msg/update.task.msg.dto";
 
 export class TaskService {
     private taskModel: TaskModel;
@@ -150,6 +151,14 @@ export class TaskService {
     async getAllMsgs(queryTaskMsgDto: Partial<QueryTaskMsgDto>): Promise<ITaskMsg[]> {
         try {
             return this.taskMsgModel.readAll(queryTaskMsgDto);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async updateManyMsg(query: Partial<QueryTaskMsgDto>, update: Partial<UpdateTaskMsgDto>): Promise<ITaskMsg[]> {
+        try {
+            return this.taskMsgModel.updateMany(query, update);
         } catch (e) {
             throw e;
         }

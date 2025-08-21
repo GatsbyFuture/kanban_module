@@ -249,7 +249,7 @@ export const optsCreateTaskMsg: RouteShorthandOptions = {
     }
 }
 
-const getMsgOne = {
+const getMsg = {
     type: 'object',
     properties: {
         id: {type: 'integer', minimum: 1},
@@ -265,7 +265,7 @@ const getMsgOne = {
 
 export const optsGetMsgOne: RouteShorthandOptions = {
     schema: {
-        querystring: getMsgOne
+        querystring: getMsg
     }
 }
 
@@ -281,5 +281,26 @@ const getMsgAll = {
 export const optsGetMsgAll: RouteShorthandOptions = {
     schema: {
         querystring: getMsgAll
+    }
+}
+
+const updateMsgs = {
+    type: 'object',
+    properties: {
+        message: {type: 'string'},
+        attachments: {type: 'object'},
+        meta: {type: 'object'},
+    },
+    anyOf: [
+        {required: ['message']},
+        {required: ['attachments']},
+        {required: ['meta']},
+    ]
+}
+
+export const optsUpdateMsgs: RouteShorthandOptions = {
+    schema: {
+        querystring: getMsg,
+        body: updateMsgs
     }
 }

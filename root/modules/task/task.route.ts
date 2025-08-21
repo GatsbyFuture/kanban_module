@@ -7,7 +7,11 @@ import {
     optsUpdateTask, optsDeleteTask,
     // FOR TASK USERS
     optsCreateTaskUser,
-    optsGetTaskUserOne, optsGetTaskUserAll, optsDeleteTaskUser, optsCreateTaskMsg, optsGetMsgOne, optsGetMsgAll,
+    optsGetTaskUserOne, optsGetTaskUserAll,
+    optsDeleteTaskUser, optsCreateTaskMsg,
+    // FOR TASK MESSAGE
+    optsGetMsgOne,
+    optsGetMsgAll, optsUpdateMsgs,
 } from "./validations/task.val";
 
 export default async function taskRoute(fastify: FastifyInstance) {
@@ -38,4 +42,6 @@ export default async function taskRoute(fastify: FastifyInstance) {
     fastify.get('/get-one-msg', optsGetMsgOne, taskController.getOneMsg.bind(taskController));
 
     fastify.get('/get-all-msgs', optsGetMsgAll, taskController.getAllMsgs.bind(taskController));
+
+    fastify.patch('/update-many-msgs', optsUpdateMsgs, taskController.updateManyMsg.bind(taskController))
 }

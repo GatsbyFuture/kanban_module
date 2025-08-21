@@ -10,6 +10,7 @@ import {QueryTaskUserDto} from "./dto/user/query.task.user.dto";
 import {DelTaskUserDto} from "./dto/user/delete.task.user.dto";
 import {CreateTaskMsgDto} from "./dto/msg/create.task.msg.dto";
 import {QueryTaskMsgDto} from "./dto/msg/query.task.msg.dto";
+import {UpdateTaskMsgDto} from "./dto/msg/update.task.msg.dto";
 
 export class TaskController {
     private taskService: TaskService;
@@ -127,6 +128,16 @@ export class TaskController {
         return {
             success: true,
             data: await this.taskService.getAllMsgs(queryTaskMsgDto)
+        }
+    }
+
+    async updateManyMsg(req: FastifyRequest, _reply: FastifyReply) {
+        const queryTaskMsgDto = req.query as Partial<QueryTaskMsgDto>;
+        const updateTaskMsgDto = req.body as Partial<UpdateTaskMsgDto>;
+
+        return {
+            success: true,
+            data: await this.taskService.updateManyMsg(queryTaskMsgDto, updateTaskMsgDto)
         }
     }
 }

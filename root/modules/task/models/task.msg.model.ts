@@ -6,6 +6,7 @@ import {ITaskMsg} from "../interfaces/task.msg.interface";
 
 import {CreateTaskMsgDto} from "../dto/msg/create.task.msg.dto";
 import {QueryTaskMsgDto} from "../dto/msg/query.task.msg.dto";
+import {UpdateTaskMsgDto} from "../dto/msg/update.task.msg.dto";
 
 const {
     DB_DATA: {
@@ -34,5 +35,10 @@ export class TaskMsgModel {
     async readAll(query: Partial<QueryTaskMsgDto>): Promise<ITaskMsg[]> {
         return this.fastify.pgsql(TB_TASKS_MESSAGES).select('*')
             .where(query);
+    }
+
+    async updateMany(query: Partial<QueryTaskMsgDto>, update: Partial<UpdateTaskMsgDto>): Promise<ITaskMsg[]> {
+        return this.fastify.pgsql(TB_TASKS_MESSAGES).update(update)
+            .where(query).returning('*');
     }
 }
