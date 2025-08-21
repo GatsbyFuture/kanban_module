@@ -31,7 +31,7 @@ export class TaskMsgModel {
             .where(query).first();
     }
 
-    async readAll(query: object): Promise<ITaskMsg[]> {
+    async readAll(query: Partial<QueryTaskMsgDto>): Promise<ITaskMsg[]> {
         return this.fastify.pgsql(TB_TASKS_MESSAGES).select('*')
             .where(query);
     }

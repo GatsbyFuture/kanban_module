@@ -268,3 +268,18 @@ export const optsGetMsgOne: RouteShorthandOptions = {
         querystring: getMsgOne
     }
 }
+
+const getMsgAll = {
+    type: 'object',
+    properties: {
+        id: {type: 'integer', minimum: 1},
+        task_id: {type: 'integer', minimum: 1},
+        user_id: {type: 'integer', minimum: 1},
+    }
+}
+
+export const optsGetMsgAll: RouteShorthandOptions = {
+    schema: {
+        querystring: getMsgAll
+    }
+}

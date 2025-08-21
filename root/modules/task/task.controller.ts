@@ -120,4 +120,13 @@ export class TaskController {
             data: await this.taskService.getOneMsg(queryTaskMsgDto)
         }
     }
+
+    async getAllMsgs(req: FastifyRequest, _reply: FastifyReply) {
+        const queryTaskMsgDto = req.query as QueryTaskMsgDto;
+
+        return {
+            success: true,
+            data: await this.taskService.getAllMsgs(queryTaskMsgDto)
+        }
+    }
 }
