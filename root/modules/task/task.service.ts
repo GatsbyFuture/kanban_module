@@ -12,6 +12,7 @@ import {CreateTaskDto} from "./dto/create.task.dto";
 import {QueryTaskDto} from "./dto/query.task.dto";
 import {UpdateTaskDto} from "./dto/update.task.dto";
 import {CreateTaskUserDto} from "./dto/create.task.user.dto";
+import {QueryTaskUserDto} from "./dto/query.task.user.dto";
 
 export class TaskService {
     private taskModel: TaskModel;
@@ -82,6 +83,20 @@ export class TaskService {
     async createUser(createTaskUserDto: CreateTaskUserDto[]): Promise<ITaskUser[]> {
         try {
             return this.taskUserModel.create(createTaskUserDto);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async getOneUser(queryTaskUserDto: QueryTaskUserDto): Promise<ITaskUser> {
+        try {
+            const task_user = await this.taskUserModel.readOne(queryTaskUserDto);
+
+            if (!task_user) {
+                throw new HttpException(ErrorCodes.TASK_USER_NOT_FOUND);
+            }
+
+            return task_user;
         } catch (e) {
             throw e;
         }

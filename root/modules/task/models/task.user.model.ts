@@ -6,7 +6,6 @@ import {ITaskUser} from "../interfaces/task.user.interface";
 
 import {CreateTaskUserDto} from "../dto/create.task.user.dto";
 import {QueryTaskUserDto} from "../dto/query.task.user.dto";
-import {IBoardUser} from "../../board/interfaces/board.user.interface";
 
 const {
     DB_DATA: {

@@ -175,3 +175,23 @@ export const optsCreateTaskUser: RouteShorthandOptions = {
         body: createUser
     }
 }
+
+const queryTaskUserOne = {
+    type: 'object',
+    properties: {
+        id: {type: 'integer', minimum: 1},
+        task_id: {type: 'integer', minimum: 1},
+        user_id: {type: 'integer', minimum: 1}
+    },
+    anyOf: [
+        {required: ['id']},
+        {required: ['task_id']},
+        {required: ['user_id']},
+    ]
+}
+
+export const optsGetTaskUserOne: RouteShorthandOptions = {
+    schema: {
+        querystring: queryTaskUserOne
+    }
+}

@@ -10,5 +10,7 @@ export const ErrorMessages: Record<ErrorCodes, { status: number, message: string
     [ErrorCodes.TASK_NOT_FOUND]: {status: 404, message: 'Task not found!'},
     [ErrorCodes.TASK_ALREADY_EXIST]: {status: 409, message: "Task already exists!"},
 
+    [ErrorCodes.TASK_USER_NOT_FOUND]: {status: 404, message: "Task user not found!"},
+
     [ErrorCodes.DATA_NOT_FOUND]: {status: 404, message: 'Data not found!'},
 }

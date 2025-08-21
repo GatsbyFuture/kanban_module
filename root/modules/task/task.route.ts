@@ -3,11 +3,11 @@ import {TaskController} from "./task.controller";
 
 import {
     optsCreateTask,
-    optsQueryTaskAll,
-    optsQueryTaskOne,
-    optsUpdateTask,
-    optsDeleteTask,
+    optsQueryTaskAll, optsQueryTaskOne,
+    optsUpdateTask, optsDeleteTask,
+    // FOR TASK USERS
     optsCreateTaskUser,
+    optsGetTaskUserOne,
 } from "./validations/task.val";
 
 export default async function taskRoute(fastify: FastifyInstance) {
@@ -25,4 +25,6 @@ export default async function taskRoute(fastify: FastifyInstance) {
 
     // FOR TASK USERS
     fastify.post('/create-users', optsCreateTaskUser, taskController.createUser.bind(taskController));
+
+    fastify.get('/get-one-user', optsGetTaskUserOne, taskController.getOneUser.bind(taskController));
 }
