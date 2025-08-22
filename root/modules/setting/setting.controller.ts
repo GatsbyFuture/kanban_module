@@ -53,7 +53,7 @@ export class SettingController {
     }
 
     // FOR TASK ROLE
-    async createRT(req: FastifyRequest, _reply: FastifyReply) {
+    async createTR(req: FastifyRequest, _reply: FastifyReply) {
         const createTaskRoleDto = req.body as CreateTaskRoleDto;
 
         return {
@@ -62,7 +62,7 @@ export class SettingController {
         }
     }
 
-    async getOneRT(req: FastifyRequest, _reply: FastifyReply) {
+    async getOneTR(req: FastifyRequest, _reply: FastifyReply) {
         const queryTaskRoleDto = req.query as Partial<QueryTaskRoleDto>;
 
         return {
@@ -71,7 +71,7 @@ export class SettingController {
         }
     }
 
-    async getAllRT(req: FastifyRequest, _reply: FastifyReply) {
+    async getAllTR(req: FastifyRequest, _reply: FastifyReply) {
         const queryTaskRoleDto = req.query as Partial<QueryTaskRoleDto>;
 
         return {
@@ -80,12 +80,49 @@ export class SettingController {
         }
     }
 
-    async deleteManyRT(req: FastifyRequest, _reply: FastifyReply) {
+    async deleteManyTR(req: FastifyRequest, _reply: FastifyReply) {
         const delTaskRoleDto = req.body as DelTaskRoleDto;
 
         return {
             success: true,
             data: await this.settingService.deleteManyTR(delTaskRoleDto.ids)
+        }
+    }
+
+    // FOR TASK PRIORITY
+    async createTP(req: FastifyRequest, _reply: FastifyReply) {
+        const createTaskRoleDto = req.body as CreateTaskRoleDto;
+
+        return {
+            success: true,
+            data: await this.settingService.createTP(createTaskRoleDto)
+        }
+    }
+
+    async getOneTP(req: FastifyRequest, _reply: FastifyReply) {
+        const queryTaskRoleDto = req.query as Partial<QueryTaskRoleDto>;
+
+        return {
+            success: true,
+            data: await this.settingService.getOneTP(queryTaskRoleDto)
+        }
+    }
+
+    async getAllTP(req: FastifyRequest, _reply: FastifyReply) {
+        const queryTaskRoleDto = req.query as Partial<QueryTaskRoleDto>;
+
+        return {
+            success: true,
+            data: await this.settingService.getAllTP(queryTaskRoleDto)
+        }
+    }
+
+    async deleteManyTP(req: FastifyRequest, _reply: FastifyReply) {
+        const delTaskRoleDto = req.body as DelTaskRoleDto;
+
+        return {
+            success: true,
+            data: await this.settingService.deleteManyTP(delTaskRoleDto.ids)
         }
     }
 }

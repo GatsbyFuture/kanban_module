@@ -153,3 +153,80 @@ export const optsDelManyTaskRoles: RouteShorthandOptions = {
         body: delManyTaskRoles
     }
 }
+
+// FOR TASK PRIORITY
+const createTaskPrio = {
+    type: 'object',
+    required: ['code', 'name', 'weight'],
+    properties: {
+        code: {
+            type: 'string',
+            pattern: '^[A-Z]+$'
+        },
+        name: {type: 'string'},
+        weight: {type: 'number'},
+        meta: {type: 'object'}
+    }
+}
+
+export const optsCreateTaskPrio: RouteShorthandOptions = {
+    schema: {
+        body: createTaskPrio,
+    }
+}
+
+const queryGetOneTaskPrio = {
+    type: 'object',
+    properties: {
+        id: {type: 'integer', minimum: 1},
+        code: {type: 'string'},
+        name: {type: 'string'},
+    },
+    anyOf: [
+        {required: ['id']},
+        {required: ['code']},
+        {required: ['name']}
+    ]
+}
+
+export const optsGetOneTaskPrio: RouteShorthandOptions = {
+    schema: {
+        querystring: queryGetOneTaskPrio,
+    }
+}
+
+const queryGetAllTaskPrio = {
+    type: 'object',
+    properties: {
+        id: {type: 'integer', minimum: 1},
+        code: {type: 'string'},
+        name: {type: 'string'},
+    }
+}
+
+export const optsGetAllTaskPrio: RouteShorthandOptions = {
+    schema: {
+        querystring: queryGetAllTaskPrio,
+    }
+}
+
+const delManyTaskPrio = {
+    type: 'object',
+    required: ['ids'],
+    properties: {
+        ids: {
+            type: 'array',
+            minItems: 1,
+            items: {
+                type: 'integer',
+                minimum: 1,
+            }
+        }
+    }
+}
+
+export const optsDelManyTaskPrio: RouteShorthandOptions = {
+    schema: {
+        body: delManyTaskPrio
+    }
+}

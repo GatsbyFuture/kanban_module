@@ -38,24 +38,49 @@ export default async function SettingRoute(fastify: FastifyInstance) {
     fastify.post(
         '/create-task-role',
         optsCreateTaskRole,
-        settingController.createRT.bind(settingController)
+        settingController.createTR.bind(settingController)
     );
 
     fastify.get(
         '/get-one-task-role',
         optsGetOneTaskRole,
-        settingController.getOneRT.bind(settingController)
+        settingController.getOneTR.bind(settingController)
     );
 
     fastify.get(
         '/get-all-task-roles',
         optsGetAllTaskRole,
-        settingController.getAllRT.bind(settingController)
+        settingController.getAllTR.bind(settingController)
     );
 
     fastify.delete(
         '/del-many-task-roles',
         optsDelManyTaskRoles,
-        settingController.deleteManyRT.bind(settingController)
+        settingController.deleteManyTR.bind(settingController)
+    );
+
+    // FOR TASK PRIORITY
+    fastify.post(
+        '/create-task-prio',
+        optsCreateTaskRole,
+        settingController.createTP.bind(settingController)
+    );
+
+    fastify.get(
+        '/get-one-task-prio',
+        optsGetOneTaskRole,
+        settingController.getOneTP.bind(settingController)
+    );
+
+    fastify.get(
+        '/get-all-task-prio',
+        optsGetAllTaskRole,
+        settingController.getAllTP.bind(settingController)
+    );
+
+    fastify.delete(
+        '/del-many-task-prio',
+        optsDelManyTaskRoles,
+        settingController.deleteManyTP.bind(settingController)
     );
 }
