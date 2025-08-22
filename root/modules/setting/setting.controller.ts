@@ -5,9 +5,9 @@ import {CreateBoardRoleDto} from "./dto/board_role/create.board.role.dto";
 import {QueryBoardRoleDto} from "./dto/board_role/query.board.role.dto";
 import {DelBoardRoleDto} from "./dto/board_role/delete.board.role.dto";
 
-import {CreateTaskRoleDto} from "./dto/task_prio/create.task.role.dto";
-import {QueryTaskRoleDto} from "./dto/task_prio/query.task.role.dto";
-import {DelTaskRoleDto} from "./dto/task_prio/delete.task.role.dto";
+import {CreateTaskRoleDto} from "./dto/task_role/create.task.role.dto";
+import {QueryTaskRoleDto} from "./dto/task_role/query.task.role.dto";
+import {DelTaskRoleDto} from "./dto/task_role/delete.task.role.dto";
 
 export class SettingController {
     private settingService: SettingService;

@@ -1,12 +1,14 @@
 import type {FastifyInstance} from "fastify";
 import {config} from '../../../config/config';
 
-import {IBoardRole, ITaskRole} from "../interfaces/setting.interface";
+import {IBoardRole, ITaskPrio, ITaskRole} from "../interfaces/setting.interface";
 
 import {CreateBoardRoleDto} from "../dto/board_role/create.board.role.dto";
 import {QueryBoardRoleDto} from "../dto/board_role/query.board.role.dto";
-import {CreateTaskRoleDto} from "../dto/task_prio/create.task.role.dto";
-import {QueryTaskRoleDto} from "../dto/task_prio/query.task.role.dto";
+import {CreateTaskRoleDto} from "../dto/task_role/create.task.role.dto";
+import {QueryTaskRoleDto} from "../dto/task_role/query.task.role.dto";
+import {QueryTaskPrioDto} from "../dto/task_prio/query.task.prio.dto";
+import {CreateTaskPrioDto} from "../dto/task_prio/create.task.prio.dto";
 
 const {
     DB_DATA: {
@@ -63,6 +65,27 @@ export class SettingModel {
 
     async deleteManyTR(ids: number[]): Promise<Partial<ITaskRole>[]> {
         return this.fastify.pgsql(TB_TASKS_ROLES).whereIn('id', ids)
+            .returning(['code', 'name']).del();
+    }
+
+    // FOR TASK PRIORITY
+    async createTP(createTaskPrioDto: CreateTaskPrioDto): Promise<ITaskPrio> {
+        return this.fastify.pgsql(TB_TASKS_PRIORITIES).insert(createTaskPrioDto)
+            .returning('*').then(rows => rows[0]);
+    }
+
+    async readOneTP(query: Partial<QueryTaskPrioDto>): Promise<ITaskPrio | undefined> {
+        return this.fastify.pgsql(TB_TASKS_PRIORITIES).select('*')
+            .where(query).first();
+    }
+
+    async readAllTP(query: Partial<QueryTaskPrioDto>): Promise<ITaskPrio[]> {
+        return this.fastify.pgsql(TB_TASKS_PRIORITIES).select('*')
+            .where(query);
+    }
+
+    async deleteManyTP(ids: number[]): Promise<Partial<ITaskPrio>[]> {
+        return this.fastify.pgsql(TB_TASKS_PRIORITIES).whereIn('id', ids)
             .returning(['code', 'name']).del();
     }
 }
