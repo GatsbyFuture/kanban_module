@@ -1,5 +1,6 @@
 import {RouteShorthandOptions} from "fastify";
 
+// FOR BOARD ROLE
 const createBoardRole = {
     type: 'object',
     required: ['code', 'name', 'weight'],
@@ -73,5 +74,82 @@ const delManyBoardRoles = {
 export const optsDelManyBoardRoles: RouteShorthandOptions = {
     schema: {
         body: delManyBoardRoles
+    }
+}
+
+// FOR TASK ROLE
+const createTaskRole = {
+    type: 'object',
+    required: ['code', 'name', 'weight'],
+    properties: {
+        code: {
+            type: 'string',
+            pattern: '^[A-Z]+$'
+        },
+        name: {type: 'string'},
+        weight: {type: 'number'},
+        meta: {type: 'object'}
+    }
+}
+
+export const optsCreateTaskRole: RouteShorthandOptions = {
+    schema: {
+        body: createTaskRole,
+    }
+}
+
+const queryGetOneTaskRole = {
+    type: 'object',
+    properties: {
+        id: {type: 'integer', minimum: 1},
+        code: {type: 'string'},
+        name: {type: 'string'},
+    },
+    anyOf: [
+        {required: ['id']},
+        {required: ['code']},
+        {required: ['name']}
+    ]
+}
+
+export const optsGetOneTaskRole: RouteShorthandOptions = {
+    schema: {
+        querystring: queryGetOneTaskRole,
+    }
+}
+
+const queryGetAllTaskRole = {
+    type: 'object',
+    properties: {
+        id: {type: 'integer', minimum: 1},
+        code: {type: 'string'},
+        name: {type: 'string'},
+    }
+}
+
+export const optsGetAllTaskRole: RouteShorthandOptions = {
+    schema: {
+        querystring: queryGetAllTaskRole,
+    }
+}
+
+const delManyTaskRoles = {
+    type: 'object',
+    required: ['ids'],
+    properties: {
+        ids: {
+            type: 'array',
+            minItems: 1,
+            items: {
+                type: 'integer',
+                minimum: 1,
+            }
+        }
+    }
+}
+
+export const optsDelManyTaskRoles: RouteShorthandOptions = {
+    schema: {
+        body: delManyTaskRoles
     }
 }

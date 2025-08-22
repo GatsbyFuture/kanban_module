@@ -4,7 +4,7 @@ import {SettingController} from "./setting.controller";
 import {
     optsCreateBoardRole,
     optsGetOneBoardRole, optsGetAllBoardRole,
-    optsDelManyBoardRoles,
+    optsDelManyBoardRoles, optsCreateTaskRole, optsGetOneTaskRole, optsGetAllTaskRole, optsDelManyTaskRoles,
 } from "./validations/setting.val";
 
 export default async function SettingRoute(fastify: FastifyInstance) {
@@ -13,24 +13,49 @@ export default async function SettingRoute(fastify: FastifyInstance) {
     fastify.post(
         '/create-board-role',
         optsCreateBoardRole,
-        settingController.create.bind(settingController)
+        settingController.createBR.bind(settingController)
     );
 
     fastify.get(
         '/get-one-board-role',
         optsGetOneBoardRole,
-        settingController.getOne.bind(settingController)
+        settingController.getOneBR.bind(settingController)
     );
 
     fastify.get(
         '/get-all-board-roles',
         optsGetAllBoardRole,
-        settingController.getAll.bind(settingController)
+        settingController.getAllBR.bind(settingController)
     );
 
     fastify.delete(
         '/del-many-board-roles',
         optsDelManyBoardRoles,
-        settingController.deleteMany.bind(settingController)
+        settingController.deleteManyBR.bind(settingController)
+    );
+
+    // FOR TASK ROLE
+    fastify.post(
+        '/create-task-role',
+        optsCreateTaskRole,
+        settingController.createRT.bind(settingController)
+    );
+
+    fastify.get(
+        '/get-one-task-role',
+        optsGetOneTaskRole,
+        settingController.getOneRT.bind(settingController)
+    );
+
+    fastify.get(
+        '/get-all-task-roles',
+        optsGetAllTaskRole,
+        settingController.getAllRT.bind(settingController)
+    );
+
+    fastify.delete(
+        '/del-many-task-roles',
+        optsDelManyTaskRoles,
+        settingController.deleteManyRT.bind(settingController)
     );
 }
