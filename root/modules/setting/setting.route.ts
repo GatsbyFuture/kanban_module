@@ -5,6 +5,7 @@ import {
     optsCreateBoardRole,
     optsGetOneBoardRole, optsGetAllBoardRole,
     optsDelManyBoardRoles, optsCreateTaskRole, optsGetOneTaskRole, optsGetAllTaskRole, optsDelManyTaskRoles,
+    optsCreateTaskPrio, optsGetOneTaskPrio, optsGetAllTaskPrio, optsDelManyTaskPrio,
 } from "./validations/setting.val";
 
 export default async function SettingRoute(fastify: FastifyInstance) {
@@ -61,26 +62,26 @@ export default async function SettingRoute(fastify: FastifyInstance) {
 
     // FOR TASK PRIORITY
     fastify.post(
-        '/create-task-prio',
-        optsCreateTaskRole,
+        '/create-task-priority',
+        optsCreateTaskPrio,
         settingController.createTP.bind(settingController)
     );
 
     fastify.get(
-        '/get-one-task-prio',
-        optsGetOneTaskRole,
+        '/get-one-task-priority',
+        optsGetOneTaskPrio,
         settingController.getOneTP.bind(settingController)
     );
 
     fastify.get(
-        '/get-all-task-prio',
-        optsGetAllTaskRole,
+        '/get-all-task-priorities',
+        optsGetAllTaskPrio,
         settingController.getAllTP.bind(settingController)
     );
 
     fastify.delete(
-        '/del-many-task-prio',
-        optsDelManyTaskRoles,
+        '/del-many-task-priorities',
+        optsDelManyTaskPrio,
         settingController.deleteManyTP.bind(settingController)
     );
 }
