@@ -32,9 +32,23 @@ export class SettingService {
         }
     }
 
-    async readOne(query: Partial<QueryBoardRoleDto>): Promise<IBoardRole | undefined> {
+    async getOne(query: Partial<QueryBoardRoleDto>): Promise<IBoardRole> {
         try {
-            return this.settingModel.readOne(query);
+            const board_role = await this.settingModel.readOne(query);
+
+            if (!board_role) {
+                throw new HttpException(ErrorCodes.DATA_NOT_FOUND);
+            }
+
+            return board_role;
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async getAll(query: Partial<QueryBoardRoleDto>): Promise<IBoardRole[]> {
+        try {
+            return this.settingModel.readAll(query);
         } catch (e) {
             throw e;
         }

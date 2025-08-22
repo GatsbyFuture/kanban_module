@@ -13,6 +13,7 @@ const createBoardRole = {
         meta: {type: 'object'}
     }
 }
+
 export const optsCreateBoardRole: RouteShorthandOptions = {
     schema: {
         body: createBoardRole,
@@ -36,5 +37,20 @@ const queryGetOneBoardRole = {
 export const optsGetOneBoardRole: RouteShorthandOptions = {
     schema: {
         querystring: queryGetOneBoardRole,
+    }
+}
+
+const queryGetAllBoardRole = {
+    type: 'object',
+    properties: {
+        id: {type: 'integer', minimum: 1},
+        code: {type: 'string'},
+        name: {type: 'string'},
+    }
+}
+
+export const optsGetAllBoardRole: RouteShorthandOptions = {
+    schema: {
+        querystring: queryGetAllBoardRole,
     }
 }

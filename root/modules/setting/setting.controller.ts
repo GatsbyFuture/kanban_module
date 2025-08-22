@@ -21,11 +21,20 @@ export class SettingController {
     }
 
     async getOne(req: FastifyRequest, _reply: FastifyReply) {
-        const queryBoardRoleDto = req.body as Partial<QueryBoardRoleDto>;
+        const queryBoardRoleDto = req.query as Partial<QueryBoardRoleDto>;
 
         return {
             success: true,
-            data: await this.settingService.readOne(queryBoardRoleDto)
+            data: await this.settingService.getOne(queryBoardRoleDto)
+        }
+    }
+
+    async getAll(req: FastifyRequest, _reply: FastifyReply) {
+        const queryBoardRoleDto = req.query as Partial<QueryBoardRoleDto>;
+
+        return {
+            success: true,
+            data: await this.settingService.getAll(queryBoardRoleDto)
         }
     }
 }

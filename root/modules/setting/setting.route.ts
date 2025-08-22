@@ -3,7 +3,8 @@ import {SettingController} from "./setting.controller";
 
 import {
     optsCreateBoardRole,
-    optsGetOneBoardRole
+    optsGetOneBoardRole,
+    optsGetAllBoardRole,
 } from "./validations/setting.val";
 
 export default async function SettingRoute(fastify: FastifyInstance) {
@@ -12,4 +13,6 @@ export default async function SettingRoute(fastify: FastifyInstance) {
     fastify.post('/create-board-role', optsCreateBoardRole, settingController.create.bind(settingController));
 
     fastify.get('/get-one-board-role', optsGetOneBoardRole, settingController.getOne.bind(settingController));
+
+    fastify.get('/get-all-board-role', optsGetAllBoardRole, settingController.getAll.bind(settingController));
 }
