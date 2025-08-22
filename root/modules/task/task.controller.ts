@@ -143,7 +143,7 @@ export class TaskController {
     }
 
     async deleteManyMsg(req: FastifyRequest, _reply: FastifyReply) {
-        const queryTaskMsgDto = req.query as DeleteTaskMsgDto;
+        const queryTaskMsgDto = req.body as DeleteTaskMsgDto;
 
         return {
             success: true,
