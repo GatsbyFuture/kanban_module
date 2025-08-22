@@ -17,7 +17,7 @@ export class SettingController {
 
         return {
             success: true,
-            data: await this.settingService.create(createBoardRoleDto)
+            data: await this.settingService.createBR(createBoardRoleDto)
         }
     }
 
@@ -26,7 +26,7 @@ export class SettingController {
 
         return {
             success: true,
-            data: await this.settingService.getOne(queryBoardRoleDto)
+            data: await this.settingService.getOneBR(queryBoardRoleDto)
         }
     }
 
@@ -35,7 +35,7 @@ export class SettingController {
 
         return {
             success: true,
-            data: await this.settingService.getAll(queryBoardRoleDto)
+            data: await this.settingService.getAllBR(queryBoardRoleDto)
         }
     }
 
@@ -44,7 +44,7 @@ export class SettingController {
 
         return {
             success: true,
-            data: await this.settingService.deleteMany(delBoardRoleDto.ids)
+            data: await this.settingService.deleteManyBR(delBoardRoleDto.ids)
         }
     }
 }

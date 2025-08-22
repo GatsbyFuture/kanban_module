@@ -1,13 +1,15 @@
 import type {FastifyInstance} from "fastify";
 import {SettingModel} from "./models/setting.model";
 
-import {IBoardRole} from "./interfaces/setting.interface";
+import {IBoardRole, ITaskRole} from "./interfaces/setting.interface";
 
 import {HttpException} from "../../errors/custom.errors";
 import {ErrorCodes} from "../../enums/error.codes";
 
 import {CreateBoardRoleDto} from "./dto/board_role/create.board.role.dto";
 import {QueryBoardRoleDto} from "./dto/board_role/query.board.role.dto";
+import {CreateTaskRoleDto} from "./dto/task_prio/create.task.role.dto";
+import {QueryTaskRoleDto} from "./dto/task_prio/query.task.role.dto";
 
 export class SettingService {
     private settingModel: SettingModel;
@@ -16,25 +18,25 @@ export class SettingService {
         this.settingModel = new SettingModel(fastify);
     }
 
-    async create(createBoardRoleDto: CreateBoardRoleDto): Promise<IBoardRole> {
+    async createBR(createBoardRoleDto: CreateBoardRoleDto): Promise<IBoardRole> {
         try {
             const {name} = createBoardRoleDto;
 
-            const board_role = await this.settingModel.readOne({name: name});
+            const board_role = await this.settingModel.readOneBR({name: name});
 
             if (board_role) {
                 throw new HttpException(ErrorCodes.DATA_ALREADY_EXIST);
             }
 
-            return this.settingModel.create(createBoardRoleDto);
+            return this.settingModel.createBR(createBoardRoleDto);
         } catch (e) {
             throw e;
         }
     }
 
-    async getOne(query: Partial<QueryBoardRoleDto>): Promise<IBoardRole> {
+    async getOneBR(query: Partial<QueryBoardRoleDto>): Promise<IBoardRole> {
         try {
-            const board_role = await this.settingModel.readOne(query);
+            const board_role = await this.settingModel.readOneBR(query);
 
             if (!board_role) {
                 throw new HttpException(ErrorCodes.DATA_NOT_FOUND);
@@ -46,17 +48,64 @@ export class SettingService {
         }
     }
 
-    async getAll(query: Partial<QueryBoardRoleDto>): Promise<IBoardRole[]> {
+    async getAllBR(query: Partial<QueryBoardRoleDto>): Promise<IBoardRole[]> {
         try {
-            return this.settingModel.readAll(query);
+            return this.settingModel.readAllBR(query);
         } catch (e) {
             throw e;
         }
     }
 
-    async deleteMany(ids: number[]): Promise<Partial<IBoardRole>[]> {
+    async deleteManyBR(ids: number[]): Promise<Partial<IBoardRole>[]> {
         try {
-            return this.settingModel.deleteMany(ids);
+            return this.settingModel.deleteManyBR(ids);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    // FOR TASK ROLE
+    async createTR(createTaskRoleDto: CreateTaskRoleDto): Promise<ITaskRole> {
+        try {
+            const {name} = createTaskRoleDto;
+
+            const task_role = await this.settingModel.readOneTR({name: name});
+
+            if (task_role) {
+                throw new HttpException(ErrorCodes.DATA_ALREADY_EXIST);
+            }
+
+            return this.settingModel.createTR(createTaskRoleDto);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async getOneTR(query: Partial<QueryTaskRoleDto>): Promise<ITaskRole> {
+        try {
+            const board_role = await this.settingModel.readOneTR(query);
+
+            if (!board_role) {
+                throw new HttpException(ErrorCodes.DATA_NOT_FOUND);
+            }
+
+            return board_role;
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async getAllTR(query: Partial<QueryTaskRoleDto>): Promise<ITaskRole[]> {
+        try {
+            return this.settingModel.readAllTR(query);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async deleteManyTR(ids: number[]): Promise<Partial<ITaskRole>[]> {
+        try {
+            return this.settingModel.deleteManyTR(ids);
         } catch (e) {
             throw e;
         }
