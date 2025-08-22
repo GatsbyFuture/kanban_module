@@ -3,6 +3,7 @@ import {SettingService} from "./setting.service";
 
 import {CreateBoardRoleDto} from "./dto/board_role/create.board.role.dto";
 import {QueryBoardRoleDto} from "./dto/board_role/query.board.role.dto";
+import {DelBoardRoleDto} from "./dto/board_role/delete.board.role.dto";
 
 export class SettingController {
     private settingService: SettingService;
@@ -35,6 +36,15 @@ export class SettingController {
         return {
             success: true,
             data: await this.settingService.getAll(queryBoardRoleDto)
+        }
+    }
+
+    async deleteMany(req: FastifyRequest, _reply: FastifyReply) {
+        const delBoardRoleDto = req.body as DelBoardRoleDto;
+
+        return {
+            success: true,
+            data: await this.settingService.deleteMany(delBoardRoleDto.ids)
         }
     }
 }

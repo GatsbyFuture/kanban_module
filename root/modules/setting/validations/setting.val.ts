@@ -54,3 +54,24 @@ export const optsGetAllBoardRole: RouteShorthandOptions = {
         querystring: queryGetAllBoardRole,
     }
 }
+
+const delManyBoardRoles = {
+    type: 'object',
+    required: ['ids'],
+    properties: {
+        ids: {
+            type: 'array',
+            minItems: 1,
+            items: {
+                type: 'integer',
+                minimum: 1,
+            }
+        }
+    }
+}
+
+export const optsDelManyBoardRoles: RouteShorthandOptions = {
+    schema: {
+        body: delManyBoardRoles
+    }
+}

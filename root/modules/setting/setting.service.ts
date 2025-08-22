@@ -53,4 +53,12 @@ export class SettingService {
             throw e;
         }
     }
+
+    async deleteMany(ids: number[]): Promise<Partial<IBoardRole>[]> {
+        try {
+            return this.settingModel.deleteMany(ids);
+        } catch (e) {
+            throw e;
+        }
+    }
 }
