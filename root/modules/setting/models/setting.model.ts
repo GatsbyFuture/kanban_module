@@ -25,12 +25,12 @@ export class SettingModel {
             .returning('*').then(rows => rows[0]);
     }
 
-    async getOne(query: QueryBoardRoleDto): Promise<IBoardRole> {
+    async readOne(query: Partial<QueryBoardRoleDto>): Promise<IBoardRole | undefined> {
         return this.fastify.pgsql(TB_BOARDS_ROLES).select('*')
             .where(query).first();
     }
 
-    async getAll(query: QueryBoardRoleDto): Promise<IBoardRole[]> {
+    async readAll(query: Partial<QueryBoardRoleDto>): Promise<IBoardRole[]> {
         return this.fastify.pgsql(TB_BOARDS_ROLES).select('*')
             .where(query);
     }
