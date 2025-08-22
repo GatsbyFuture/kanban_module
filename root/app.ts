@@ -13,6 +13,7 @@ import pgsqlPlugin from './plugins/pgsql';
 import boardRoute from "./modules/board/board.route";
 import columnRoute from "./modules/column/column.route";
 import taskRoute from "./modules/task/task.route";
+import settingRoute from "./modules/setting/setting.route";
 
 const log_path = path.join(__dirname, 'logs');
 if (!fs.existsSync(log_path)) {
@@ -58,6 +59,7 @@ fastify.register(pgsqlPlugin);
 fastify.register(boardRoute, {prefix: '/board'});
 fastify.register(columnRoute, {prefix: '/column'});
 fastify.register(taskRoute, {prefix: '/task'});
+fastify.register(settingRoute, {prefix: '/setting'});
 
 const start = async () => {
     try {

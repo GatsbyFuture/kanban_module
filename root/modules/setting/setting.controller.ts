@@ -4,7 +4,7 @@ import {SettingService} from "./setting.service";
 import {CreateBoardRoleDto} from "./dto/board_role/create.board.role.dto";
 
 export class SettingController {
-    settingService: SettingService;
+    private settingService: SettingService;
 
     constructor(protected fastify: FastifyInstance) {
         this.settingService = new SettingService(fastify);
