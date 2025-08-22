@@ -2,6 +2,7 @@ import type {FastifyInstance, FastifyReply, FastifyRequest} from "fastify";
 import {SettingService} from "./setting.service";
 
 import {CreateBoardRoleDto} from "./dto/board_role/create.board.role.dto";
+import {QueryBoardRoleDto} from "./dto/board_role/query.board.role.dto";
 
 export class SettingController {
     private settingService: SettingService;
@@ -16,6 +17,15 @@ export class SettingController {
         return {
             success: true,
             data: await this.settingService.create(createBoardRoleDto)
+        }
+    }
+
+    async getOne(req: FastifyRequest, _reply: FastifyReply) {
+        const queryBoardRoleDto = req.body as Partial<QueryBoardRoleDto>;
+
+        return {
+            success: true,
+            data: await this.settingService.readOne(queryBoardRoleDto)
         }
     }
 }

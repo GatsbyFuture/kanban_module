@@ -7,6 +7,7 @@ import {HttpException} from "../../errors/custom.errors";
 import {ErrorCodes} from "../../enums/error.codes";
 
 import {CreateBoardRoleDto} from "./dto/board_role/create.board.role.dto";
+import {QueryBoardRoleDto} from "./dto/board_role/query.board.role.dto";
 
 export class SettingService {
     private settingModel: SettingModel;
@@ -26,6 +27,14 @@ export class SettingService {
             }
 
             return this.settingModel.create(createBoardRoleDto);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async readOne(query: Partial<QueryBoardRoleDto>): Promise<IBoardRole | undefined> {
+        try {
+            return this.settingModel.readOne(query);
         } catch (e) {
             throw e;
         }

@@ -1,18 +1,40 @@
 import {RouteShorthandOptions} from "fastify";
 
-const createBoard = {
+const createBoardRole = {
     type: 'object',
     required: ['code', 'name', 'weight'],
     properties: {
-        code: {type: 'string'},
+        code: {
+            type: 'string',
+            pattern: '^[A-Z]+$'
+        },
         name: {type: 'string'},
         weight: {type: 'number'},
         meta: {type: 'object'}
     }
 }
-
-export const optsCreateBoard: RouteShorthandOptions = {
+export const optsCreateBoardRole: RouteShorthandOptions = {
     schema: {
-        body: createBoard,
+        body: createBoardRole,
+    }
+}
+
+const queryGetOneBoardRole = {
+    type: 'object',
+    properties: {
+        id: {type: 'integer', minimum: 1},
+        code: {type: 'string'},
+        name: {type: 'string'},
+    },
+    anyOf: [
+        {required: ['id']},
+        {required: ['code']},
+        {required: ['name']}
+    ]
+}
+
+export const optsGetOneBoardRole: RouteShorthandOptions = {
+    schema: {
+        querystring: queryGetOneBoardRole,
     }
 }
