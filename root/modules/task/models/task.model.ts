@@ -13,7 +13,8 @@ const {
             TABLES: {
                 TB_COLUMNS_TASKS,
                 TB_TASKS_USERS,
-                TB_TASKS_MESSAGES
+                TB_TASKS_MESSAGES,
+                TB_TASKS_PRIORITIES
             }
         }
     }
@@ -40,8 +41,9 @@ export class TaskModel {
         return this.fastify.pgsql(`${TB_COLUMNS_TASKS} as t`)
             .select([
                 't.*',
+                this.fastify.pgsql.raw(`COALESCE((to_jsonb(p) - 'id'), '{}'::jsonb) AS priority`),
                 this.fastify.pgsql.raw(`COALESCE(u.users, '[]'::jsonb) as users`),
-                this.fastify.pgsql.raw(`COALESCE(m.messages, '[]'::jsonb) as messages`),
+                this.fastify.pgsql.raw(`COALESCE(m.messages, '[]'::jsonb) as messages`)
             ])
             .leftJoin(this.fastify.pgsql.raw(`
               LATERAL (
@@ -50,6 +52,7 @@ export class TaskModel {
                            'id', tu.id,
                            'user_id', tu.user_id,
                            'role', tu.role_id,
+                           'meta', tu.meta,
                            'assigned_at', tu.assigned_at
                          )
                          ORDER BY tu.assigned_at
@@ -76,6 +79,7 @@ export class TaskModel {
                 WHERE tm.task_id = t.id
               ) m ON TRUE
               `))
+            .leftJoin(`${TB_TASKS_PRIORITIES} as p`, 'p.id', 't.priority_id')
             .modify((qb) => {
                 if ((query as any)?.id !== undefined) {
                     qb.where('t.id', (query as any).id);
@@ -92,8 +96,9 @@ export class TaskModel {
         return this.fastify.pgsql(`${TB_COLUMNS_TASKS} as t`)
             .select([
                 't.*',
+                this.fastify.pgsql.raw(`COALESCE((to_jsonb(p) - 'id'), '{}'::jsonb) AS priority`),
                 this.fastify.pgsql.raw(`COALESCE(u.users, '[]'::jsonb) as users`),
-                this.fastify.pgsql.raw(`COALESCE(m.messages, '[]'::jsonb) as messages`),
+                this.fastify.pgsql.raw(`COALESCE(m.messages, '[]'::jsonb) as messages`)
             ])
             .leftJoin(this.fastify.pgsql.raw(`
               LATERAL (
@@ -102,6 +107,7 @@ export class TaskModel {
                            'id', tu.id,
                            'user_id', tu.user_id,
                            'role', tu.role_id,
+                           'meta', tu.meta,
                            'assigned_at', tu.assigned_at
                          )
                          ORDER BY tu.assigned_at
@@ -128,6 +134,7 @@ export class TaskModel {
                 WHERE tm.task_id = t.id
               ) m ON TRUE
               `))
+            .leftJoin(`${TB_TASKS_PRIORITIES} as p`, 'p.id', 't.priority_id')
             .modify((qb) => {
                 if ((query as any)?.id !== undefined) {
                     qb.where('t.id', (query as any).id);
