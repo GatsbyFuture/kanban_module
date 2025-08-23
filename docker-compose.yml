@@ -1,0 +1,10 @@
+services:
+  app:
+    build:
+      context: .
+    image: kanban-module-x:latest
+    container_name: kanban-module-x
+    network_mode: host
+    ports:
+      - "5650:5650"
+    restart: unless-stopped
