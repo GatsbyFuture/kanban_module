@@ -4,7 +4,8 @@ services:
       context: .
     image: kanban-module-x:latest
     container_name: kanban-module-x
+    env_file: .env
     network_mode: host
     ports:
-      - "5650:5650"
+      - "5250:5250"
     restart: unless-stopped

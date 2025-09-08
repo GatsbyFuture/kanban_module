@@ -24,7 +24,7 @@ export class TaskModel {
     constructor(protected fastify: FastifyInstance) {
     }
 
-    async create(createTaskDto: CreateTaskDto): Promise<ITask> {
+    async create(createTaskDto: Partial<CreateTaskDto>): Promise<ITask> {
         return this.fastify.pgsql(TB_COLUMNS_TASKS).insert(createTaskDto)
             .returning('*').then(rows => rows[0]);
     }

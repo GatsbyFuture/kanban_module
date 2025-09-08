@@ -21,7 +21,7 @@ export class TaskController {
     }
 
     async create(req: FastifyRequest, _reply: FastifyReply) {
-        const createTaskDto = req.body as CreateTaskDto;
+        const createTaskDto = req.body as Partial<CreateTaskDto>;
         const made_by = String(req.headers['x-user-id'] || '');
 
         return {

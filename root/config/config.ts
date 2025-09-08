@@ -53,8 +53,8 @@ export const config: Config = {
                 PG_HOST: getConfigEnv('DB_HOST', '127.0.0.1'),
                 PG_PORT: Number(getConfigEnv('DB_PORT', '5432')),
                 PG_USER: getConfigEnv('DB_USER', 'super'),
-                PG_PASS: getConfigEnv('DB_PASS', 'jop13$'),
-                PG_NAME: getConfigEnv('DB_NAME', 'db_call_center_x')
+                PG_PASS: getConfigEnv('DB_PASS', 'super-pwd'),
+                PG_NAME: getConfigEnv('DB_NAME', 'db_modules')
             },
             TABLES: {
                 TB_BOARDS: 'tb_boards',

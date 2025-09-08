@@ -63,7 +63,7 @@ fastify.register(settingRoute, {prefix: '/setting'});
 
 const start = async () => {
     try {
-        const port: number = parseInt(process.env.PORT || "5651", 10);
+        const port: number = parseInt(process.env.PORT || "5251", 10);
         await fastify.listen({port: port, host: '0.0.0.0'});
         console.log('Server listening on port :', port);
     } catch (e) {

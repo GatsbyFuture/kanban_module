@@ -30,13 +30,13 @@ export class TaskService {
         this.taskMsgModel = new TaskMsgModel(fastify);
     }
 
-    async create(createTaskDto: CreateTaskDto, made_by: string): Promise<ITask> {
+    async create(createTaskDto: Partial<CreateTaskDto>, made_by: string): Promise<ITask> {
         try {
-            const task = await this.taskModel.readOne({title: createTaskDto.title});
-
-            if (task) {
-                throw new HttpException(ErrorCodes.TASK_ALREADY_EXIST);
-            }
+            // const task = await this.taskModel.readOne({title: createTaskDto.title});
+            //
+            // if (task) {
+            //     throw new HttpException(ErrorCodes.TASK_ALREADY_EXIST);
+            // }
 
             const id: number = made_by ? +made_by : 0;
 

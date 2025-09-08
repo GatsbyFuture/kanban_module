@@ -9,8 +9,14 @@ const createTask = {
         title: {type: "string", minLength: 1},
         desc: {type: "string"},
         priority_id: {type: "number"},
-        start_date: {type: "string", format: "date-time"},
-        due_date: {type: "string", format: "date-time"},
+        start_date: {
+            type: ["string", "null"],
+            format: "date-time"
+        },
+        due_date: {
+            type: ["string", "null"],
+            format: "date-time"
+        },
         order_rank: {type: "string"},
         external_refs: {type: "object"},
         contact: {type: "object"},

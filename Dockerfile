@@ -8,8 +8,8 @@ RUN npm install --omit=dev
 
 COPY dist ./dist
 
-COPY .env .env
+#COPY .env .env
 
-EXPOSE 5650
+EXPOSE 5250
 
 CMD ["node", "dist/app.js"]

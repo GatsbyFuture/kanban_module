@@ -37,7 +37,7 @@ export async function up(knex: Knex): Promise<void> {
                 .defaultTo(null);
 
             t.date('start_date');
-            t.date('due_date');
+            t.date('due_date').defaultTo(null);
             t.timestamp('completed_at');
 
             // Drag order (decimal lets you insert between two tasks without reindexing all)
@@ -54,12 +54,12 @@ export async function up(knex: Knex): Promise<void> {
             t.jsonb('checklist').notNullable().defaultTo('[]'); // [{id,text,done}]
 
             // Audit
-            t.integer('made_by').notNullable();
+            t.integer('made_by').defaultTo(0);
             t.jsonb('updated_by').defaultTo('{}');
 
             t.jsonb('meta').notNullable().defaultTo('{}');
 
-            t.boolean('is_active').notNullable().defaultTo(false);
+            t.boolean('is_active').notNullable().defaultTo(true);
             t.timestamp('updated_at').notNullable().defaultTo(knex.fn.now());
             t.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
 
